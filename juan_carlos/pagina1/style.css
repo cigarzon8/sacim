@@ -1,0 +1,43 @@
+body {
+    text-align: center;
+}
+
+.primer-parrafo {
+    margin-top: 60px;
+}
+
+.espacio {
+    height: 90px;
+}
+
+.campo {
+    margin-top: 10px;
+}
+
+
+.fa-eye-slash {
+    cursor: pointer;
+}
+
+#ingresar {
+    height: 25px;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #0866FF;
+    color: white;
+}
+
+.new-line {
+    height: 60px;
+}
+
+#rc {
+    margin-top: 10px;
+    color: #0866FF;
+    text-decoration: none;
+}
+
+#rc:hover {
+    cursor: pointer;
+}
+
