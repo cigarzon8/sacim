@@ -1,0 +1,19 @@
+{
+  "name": "sacim",
+  "version": "1.0.0",
+  "description": "parkingapp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cesar Garzon, juan carlos",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.3",
+    "hbs": "^4.2.0",
+    "mysql2": "^3.10.2",
+    "nodemon": "^3.1.4",
+    "sequelize": "^6.37.3"
+  }
+}
