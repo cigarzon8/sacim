@@ -1,0 +1,56 @@
+/*Cesar*/
+.imglogo{
+    max-width: 50px;
+}
+footer{
+    max-width: 500px;
+    margin-top: 50px;
+}
+/*juan carlos*/
+body {
+    text-align: center;
+}
+#login {
+    float: left;
+}
+.fa-eye-slash {
+    cursor: pointer;
+}
+#ingresar {
+    background-color: #0866FF;
+    color: white;
+    margin: 10px;
+}
+#rc {
+    color: #0866FF;
+    text-decoration: none;
+}
+.rcdiv{
+    margin-top: 25px;    
+}
+#rc:hover {
+    cursor: pointer;
+}
+.subtitle{
+    margin-bottom: 50px;
+}
+.principalname{
+    margin-top: 25px;
+}
+input{
+    margin:10px;
+}
+
+
+
+/*Rolando*/
+
+.container-xxlRolando{
+    height: 150px;
+    width: 150px;
+    border: 2px solid;
+    left: 100px;
+    margin-right: 26px;
+}
+
+

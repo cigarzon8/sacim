@@ -6,11 +6,6 @@ const sequelize = require('../db.js');
 const User = sequelize.define(
   'User',
   {
-    intusuario: {
-      type: DataTypes.INTEGER ,
-      allowNull: false,
-      required: true,
-    },
     nombres: {
       type: DataTypes.STRING,
       allowNull: false,

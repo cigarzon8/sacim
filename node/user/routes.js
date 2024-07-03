@@ -8,7 +8,7 @@ router.get('/', async function(req, res) {
 
   const usersData = users.map(user => user.toJSON());
 
-  console.log('users',users)
+  console.log('users',usersData)
   res.render('list', {datalist:usersData});
 });
 // define the about route
