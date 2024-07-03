@@ -4,7 +4,7 @@
   "description": "parkingapp",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "local": "nodemon app.js"
   },
   "author": "Cesar Garzon, juan carlos",
   "license": "ISC",

@@ -2,15 +2,39 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
 
+
 const User = sequelize.define(
   'User',
   {
-    firstName: {
+    intusuario: {
+      type: DataTypes.INTEGER ,
+      allowNull: false,
+      required: true,
+    },
+    nombres: {
       type: DataTypes.STRING,
       allowNull: false,
+      required: true,
     },
-    lastName: {
+    apellidos: {
       type: DataTypes.STRING,
+      allowNull: false,      
+      required: true,
+    },
+    correo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
+    documento: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    estado: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
     },
   },
   {
@@ -19,5 +43,4 @@ const User = sequelize.define(
 );
 User.sync({ force: true });
 
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+module.exports = User;

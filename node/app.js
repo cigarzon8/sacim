@@ -3,7 +3,7 @@ const { engine } = require('express-handlebars'); // Importar la función engine
 const app = express();
 const port = 3000;
 
-const user = require('./user/routes');
+const userroute = require('./user/routes');
 
 const sequelize = require('./db');
 
@@ -19,35 +19,34 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views'); // Directorio de las vistas
 
-const data = {
-    title: 'Handlebars Example',
-    books: [
-        {
-            title: 'Book 1',
-            author: 'John Doe',
-            synopsis: 'This is the synopsis of book 1.'
-        },
-        {
-            title: 'Book 2',
-            author: 'Jane Smith',
-            synopsis: 'This is the synopsis of book 2.'
-        },
-        {
-            title: 'Book 3',
-            author: 'Bob Johnson',
-            synopsis: 'This is the synopsis of book 3.'
-        }
-    ]
-};
-
 app.get('/', (req, res) => {
     //res.render('login', data);
+    let usr = {
+        intusuario:1,
+        nombres:'nombres',
+        apellidos:'apellidos',
+        correo:'prueba@prueba.com',
+        documento:123456,
+        estado:1,
+    }
+    let usr2 = {
+        intusuario:2,
+        nombres:'nombres',
+        apellidos:'apellidos',
+        correo:'prueba@prueba.com',
+        documento:123456,
+        estado:1,
+    }
+    const user = new User(usr);
+    const user2 = new User(usr2);
+    user2.save()
+    user.save()
     const users = User.findAll();
     res.json(users);
 
 });
 
-app.use('/user', user);
+app.use('/user', userroute);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
