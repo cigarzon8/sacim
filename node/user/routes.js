@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../model/User');
+const auth = require('../midleware/auth')
 
 router.get('/', async function(req, res) {
   const users = await User.findAll();
@@ -9,7 +10,7 @@ router.get('/', async function(req, res) {
   res.render('list', {datalist:usersData});
 });
 
-router.get('/bienvenido', async function(req, res) {
+router.get('/bienvenido',auth, async function(req, res) {
   const users = await User.findAll();
   const usersData = users.map(user => user.toJSON());
   res.render('bienvenido', {datalist:usersData});

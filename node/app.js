@@ -36,17 +36,6 @@ app.use(session({
   secret: 'shhhh, very secret'
 }));
 
-app.use(function(req, res, next){
-    /*console.log('req.originalUrl',req.url)
-    if (req.originalUrl != '/'){
-        if (!req?.session?.user) return res.redirect('/');
-        next();
-    }*/
-    next();
-
-  });
-
-
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
