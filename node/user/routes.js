@@ -5,16 +5,37 @@ const User = require('../model/User');
 
 router.get('/', async function(req, res) {
   const users = await User.findAll();
-
   const usersData = users.map(user => user.toJSON());
-
-  console.log('users',usersData)
   res.render('list', {datalist:usersData});
 });
-// define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
+
+router.get('/bienvenido', async function(req, res) {
+  const users = await User.findAll();
+  const usersData = users.map(user => user.toJSON());
+  res.render('bienvenido', {datalist:usersData});
 });
 
-module.exports = router;
+router.post('/auth', async function(req, res) {
+  const user = await authenticate(req.body.usuario, req.body.password)
+  if (!user) res.redirect('/');
+  req.session.user = user;
+  res.redirect('/user/bienvenido');
+});
 
+router.get('/logout', async function(req, res) {
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+});
+
+async function authenticate(name, pass, fn) {
+  return await User.findOne({
+    where: {
+      password: pass,
+      correo: name
+    },
+    limit:1
+  });
+}
+
+module.exports = router;

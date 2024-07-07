@@ -26,6 +26,11 @@ const User = sequelize.define(
       allowNull: false,
       required: true,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
     estado: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -36,6 +41,6 @@ const User = sequelize.define(
     // Other model options go here
   },
 );
-User.sync({ force: true });
+//User.sync({ force: true });
 
 module.exports = User;

@@ -6,22 +6,23 @@
         <P class="principalname"><b>SACIM</b></P>
         <p class="subtitle"><b>carros y motos</b></p>
     </div>
-    <form>
+    <form action="/user/auth" method="post">
         <div>
             <label>usuario</label>
-            <input type="text">
+            <input id="usuario" class="usuario" name="usuario" type="text">
         </div>
         <div>
             <label>contraseña</label>
-            <input type="password">
+            <input id="password" class="password" name="password" type="password">
             <i class="fas fa-eye-slash"></i>
         </div>
-    </form>
     <diV>
-        <a href="bienvenido.html">
-            <button id="ingresar"><b>ingresar</b></button>
+        <a>
+            <input type="submit" value="Ingresar" id="ingresar"></input>
         </a>
     </diV>
+    </form>
+
     <div class="rcdiv">
         <a href="" id="rc">Recuperar contraseña</a>
     </div>
