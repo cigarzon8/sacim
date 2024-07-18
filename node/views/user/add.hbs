@@ -1,0 +1,73 @@
+{{> layout}}
+{{> nav}}
+<div class="container-xx3">
+<a href="/user">List</a>
+
+<form  id="useradd" action="/user/add" method="post" class="needs-validation was-validated" novalidate>
+
+  <div class="form-group">
+    <label for="nombres">Nombres</label>
+    <input type="text" class="form-control" name="nombres" id="nombres" placeholder="pedro pepito" autocomplete="off" required>
+    <div class="valid-feedback">
+      ok!
+    </div>
+    <div class="invalid-feedback">
+      Seleccione un nombre.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="apellidos">Apellidos</label>
+    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="perez pascal" autocomplete="off" required>
+    <div class="valid-feedback">
+      ok!
+    </div>
+    <div class="invalid-feedback">
+      Seleccione un Apellidos.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="correo">Correo</label>
+    <input type="email" class="form-control" name="correo" id="correo" placeholder="name@example.com" autocomplete="off" required>
+    <div class="valid-feedback">
+      ok!
+    </div>
+    <div class="invalid-feedback">
+      Seleccione un Correo.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="documento">Documento</label>
+    <input type="number" class="form-control" name="documento" id="documento" placeholder="123456789" autocomplete="off" required>
+    <div class="valid-feedback">
+      ok!
+    </div>
+    <div class="invalid-feedback">
+      Seleccione un Documento.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input type="password" class="form-control" name="password" id="password" placeholder="password" autocomplete="off" required>
+    <div class="valid-feedback">
+      ok!
+    </div>
+    <div class="invalid-feedback">
+      Seleccione una contraseña.
+    </div>
+  </div>
+
+    <diV>
+        <a>
+            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
+        </a>
+    </diV>
+
+</form>
+
+</div>
+
+{{> footer}}
