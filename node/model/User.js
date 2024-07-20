@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
 
-
 const User = sequelize.define(
   'User',
   {
@@ -20,11 +19,13 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
+      unique: true,
     },
     documento: {
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,

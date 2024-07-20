@@ -7,7 +7,7 @@ const auth = require('../midleware/auth')
 router.get('/', async function(req, res) {
   const users = await User.findAll();
   const usersData = users.map(user => user.toJSON());
-  const values = ["#","Estado","Nombres","Apellidos","Correo","Documento"]
+  const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]
   res.render('user/list', {datalist:usersData,headerlist:values});
 });
 
@@ -22,21 +22,52 @@ router.post('/auth', async function(req, res) {
   res.redirect('/user/bienvenido');
 });
 
-router.get('/logout', async function(req, res) {
+router.get('/logout',auth, async function(req, res) {
   req.session.destroy(function(){
     res.redirect('/');
   });
 });
 
-router.get('/add', async function(req, res) {
-  res.render('user/add');
+router.get('/add',auth, async function(req, res) {
+  let meesaje = {
+    estado:'danger',
+    text:'aguacate'
+  }
+  res.render('user/add',{data:{},meesaje:meesaje});
 });
 
-router.post('/add', async function(req, res) {
+router.post('/add',auth, async function(req, res) {
   req.body.estado = 1
+  let meesaje = {
+    estado:'success',
+    text:'Usuario Creador correctamente'
+  }
+
+
+  for (let key in req.body) {
+    if (req.body[key] === null) {
+      meesaje.estado = 'danger',
+      meesaje.text = 'Diligencie todos los campos'
+      return res.render('user/add',{data:req.body,meesaje:meesaje});
+    }
+  }
+
   const user = new User(req.body);
-  user.save()
-  res.redirect('/user')
+
+  try {
+    await user.save();
+    res.render('user/add',{data:{},meesaje:meesaje});
+  } catch (error) {
+    meesaje.estado = 'danger',
+    meesaje.text = 'Correo o documento duplicado'
+    res.render('user/add',{data:req.body,meesaje:meesaje});
+  }
+});
+
+router.get('/remove/:id',auth, async function(req, res) {
+  const users = await User.findOne({id:req.params.id});
+  await users.destroy()
+  res.redirect('/user');
 });
 
 async function authenticate(name, pass, fn) {

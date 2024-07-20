@@ -13,7 +13,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user">Usuarios</a>
                 </li>
-                <hr>
+                  <hr>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Parqueaderos</a>
                 </li>
@@ -33,3 +33,9 @@
         </div>
     </div>
 </nav>
+
+{{#if meesaje}}
+    <div class="alert alert-{{meesaje.estado}}" role="alert">
+    {{meesaje.text}}
+    </div>
+{{/if}}
