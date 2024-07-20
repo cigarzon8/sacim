@@ -29,11 +29,7 @@ router.get('/logout',auth, async function(req, res) {
 });
 
 router.get('/add',auth, async function(req, res) {
-  let meesaje = {
-    estado:'danger',
-    text:'aguacate'
-  }
-  res.render('user/add',{data:{},meesaje:meesaje});
+  res.render('user/add',{data:{},meesaje:{}});
 });
 
 router.post('/add',auth, async function(req, res) {
