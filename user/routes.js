@@ -4,7 +4,7 @@ var router = express.Router();
 const User = require('../model/User');
 const auth = require('../midleware/auth')
 
-router.get('/', async function(req, res) {
+router.get('/', auth,async function(req, res) {
   const users = await User.findAll();
   const usersData = users.map(user => user.toJSON());
   const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]

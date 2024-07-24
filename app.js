@@ -2,13 +2,12 @@
 
 const express = require('express');
 const { engine } = require('express-handlebars');
-var hash = require('pbkdf2-password')()
 var session = require('express-session');
-
+var path = require('path');
 
 const app = express();
 const port = 3000;
-var path = require('path');
+
 
 //routes
 const userroute = require('./user/routes');
@@ -38,21 +37,9 @@ app.use(session({
 
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
-
+console.log(path.join(__dirname, 'public','img', 'favicon.ico'))
 app.get('/', (req, res) => {
-    /*let usr = {
-        intusuario:1,
-        nombres:'nombres',
-        apellidos:'apellidos',
-        correo:'prueba@prueba.com',
-        documento:123456,
-        estado:1,
-        password:'123'
-    }
-    const user = new User(usr);
-    user.save()*/
     res.render('login');
-
 });
 
 app.use('/user', userroute);
