@@ -9,14 +9,17 @@ const app = express();
 const port = 3000;
 
 
-//routes
-const userroute = require('./user/routes');
-
+//controller
+const userroute = require('./controler/user');
+const vehiculeroute = require('./controler/vehiculo')
 
 
 /**DB */
 const sequelize = require('./db');
+const Vehiculo = require('./model/Vehiculo');
+const Estado = require('./model/Estado');
 const User = require('./model/User');
+
 
 
 
@@ -43,6 +46,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userroute);
+app.use('/vehiculo',vehiculeroute)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

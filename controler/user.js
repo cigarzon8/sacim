@@ -2,12 +2,27 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../model/User');
+const Estado = require('../model/Estado')
 const auth = require('../midleware/auth')
 
 router.get('/', auth,async function(req, res) {
-  const users = await User.findAll();
-  const usersData = users.map(user => user.toJSON());
-  const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]
+  const users = await User.findAll({
+    include: {
+      model: Estado,
+      attributes: ['NombreEstado'],
+    },
+  });
+
+  const usersData = users.map(
+    user => {
+      const userJson = user.toJSON();
+      userJson.estado = user.Estado.NombreEstado;
+      return userJson;
+    }
+    );
+    console.log('usersData',usersData)
+    const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]
+
   res.render('user/list', {datalist:usersData,headerlist:values});
 });
 
@@ -17,9 +32,9 @@ router.get('/bienvenido',auth, async function(req, res) {
 
 router.post('/auth', async function(req, res) {
   const user = await authenticate(req.body.usuario, req.body.password)
-  if (!user) res.redirect('/');
+  if (!user) return res.redirect('/');
   req.session.user = user;
-  res.redirect('/user/bienvenido');
+  return res.redirect('/user/bienvenido');
 });
 
 router.get('/logout',auth, async function(req, res) {
@@ -33,6 +48,7 @@ router.get('/add',auth, async function(req, res) {
 });
 
 router.post('/add',auth, async function(req, res) {
+  console.log('req.body',req.body)
   req.body.estado = 1
   let meesaje = {
     estado:'success',
@@ -54,6 +70,7 @@ router.post('/add',auth, async function(req, res) {
     await user.save();
     res.render('user/add',{data:{},meesaje:meesaje});
   } catch (error) {
+    console.log('error',error)
     meesaje.estado = 'danger',
     meesaje.text = 'Correo o documento duplicado'
     res.render('user/add',{data:req.body,meesaje:meesaje});
