@@ -20,7 +20,7 @@ const Vehiculo = require('./model/Vehiculo');
 const Estado = require('./model/Estado');
 const User = require('./model/User');
 const Parqueadero = require('./model/Parqueadero');
-
+const Cobro = require('./model/Cobros')
 
 
 // Configurar expresss
