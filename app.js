@@ -9,15 +9,18 @@ const app = express();
 const port = 3000;
 
 
-//routes
-const userroute = require('./user/routes');
-
-
+//controller
+const userroute = require('./controler/user');
+const vehiculeroute = require('./controler/vehiculo')
+const parqueaderoroute = require('./controler/parqueadero')
 
 /**DB */
 const sequelize = require('./db');
+const Vehiculo = require('./model/Vehiculo');
+const Estado = require('./model/Estado');
 const User = require('./model/User');
-
+const Parqueadero = require('./model/Parqueadero');
+const Cobro = require('./model/Cobros')
 
 
 // Configurar expresss
@@ -43,6 +46,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userroute);
+app.use('/vehiculo',vehiculeroute)
+app.use('/parqueadero',parqueaderoroute)
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

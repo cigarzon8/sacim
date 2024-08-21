@@ -1,0 +1,38 @@
+{{> layout}}
+{{> nav}}
+<div class="container-xx3">
+<a href="/vehiculo">List</a>
+
+<form  id="useradd" action="/parqueadero/add" method="post" class="needs-validation was-validated" novalidate>
+
+  <div class="form-group">
+
+    <div class="form-group">
+        <label for="input-datalist">Tipo Parqueadero</label>
+        <input type="text" class="form-control" placeholder="Tipo parqueadero" list="list-Usuario" name="tipoveparqueadero" id="tipoveparqueadero" placeholder="Seleccione un tipo" required value="{{data.idusuario}}" autocomplete="off">
+        <datalist id="list-Usuario">
+            {{#each estadoData}}
+                <option>{{this.NombreEstado}} - {{this.id}}</option>
+            {{/each}}
+        </datalist>
+        <div class="valid-feedback">
+        ok!
+        </div>
+        <div class="invalid-feedback">
+        Seleccione un nombre.
+        </div>
+    </div>
+
+  </div>
+
+    <diV>
+        <a>
+            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
+        </a>
+    </diV>
+
+</form>
+
+</div>
+
+{{> footer}}
