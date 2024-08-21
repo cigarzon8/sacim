@@ -13,6 +13,7 @@ const port = 3000;
 const userroute = require('./controler/user');
 const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
+const cobrosroute = require('./controler/cobros')
 
 /**DB */
 const sequelize = require('./db');
@@ -48,7 +49,7 @@ app.get('/', (req, res) => {
 app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
 app.use('/parqueadero',parqueaderoroute)
-
+app.use('/cobros',cobrosroute)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -12,17 +12,27 @@ const Cobro = sequelize.define(
         allowNull: false,
         required: true,
       },
-    tiempo: {
+      tiempo: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
       },
-    fechacobro: {
+      fechainicio: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
       },
-    estado: {
+      fechafin: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
+      },
+      fechacobro: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
+      },
+      estado: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
@@ -31,7 +41,7 @@ const Cobro = sequelize.define(
           key: 'id',
         }
       },
-    tipoveparqueadero: {
+      tipoveparqueadero: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
@@ -48,6 +58,6 @@ const Cobro = sequelize.define(
 Cobro.belongsTo(Estado, { foreignKey: 'tipoveparqueadero', as: 'TipoParqueaderoRelacion' });
 Cobro.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
 Cobro.hasMany(Vehiculo, { foreignKey: 'id' });
-//Cobro.sync({ force: true });
+Cobro.sync({ force: true });
 
 module.exports = Cobro;
