@@ -1,12 +1,15 @@
 const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
-const Estado = require('./Estado')
-const Vehiculo = require('./Estado')
 
 const Cobro = sequelize.define(
   'Cobro',
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     valor: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -18,17 +21,17 @@ const Cobro = sequelize.define(
         required: true,
       },
       fechainicio: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         required: true,
       },
       fechafin: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         required: true,
       },
       fechacobro: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         required: true,
       },
@@ -36,28 +39,19 @@ const Cobro = sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
-        references: {
-          model: Estado,
-          key: 'id',
-        }
       },
       tipoveparqueadero: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
-        references: {
-            model: Estado,
-            key: 'id',
-        }
     },
+    vehiculo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
   },
-  {
-    // Other model options go here
-  },
+  }
 );
-Cobro.belongsTo(Estado, { foreignKey: 'tipoveparqueadero', as: 'TipoParqueaderoRelacion' });
-Cobro.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-Cobro.hasMany(Vehiculo, { foreignKey: 'id' });
-Cobro.sync({ force: true });
+
 
 module.exports = Cobro;

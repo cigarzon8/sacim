@@ -20,14 +20,13 @@ router.get('/', auth,async function(req, res) {
     }
   ]
   });
-
   const vehiculodata = vehiculo.map(vehi =>{
      const vehiculoJson = vehi.toJSON();
     vehiculoJson.estado = vehi.EstadoRelacion.NombreEstado;
     vehiculoJson.tipovehiculo = vehi.TipoVehiculoRelacion.NombreEstado;
+    vehiculoJson.idtipovehiculo = vehi.tipovehiculo
     return vehiculoJson
   } );
-
   const users = await User.findAll();
 
   const values = ["#","Estado","Placa","Tipo Vehiculo","Usuario"]

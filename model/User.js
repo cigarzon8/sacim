@@ -1,8 +1,6 @@
 const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
-const Estado = require('./Estado')
-const Vehiculo = require('./Estado')
 
 const User = sequelize.define(
   'User',
@@ -43,18 +41,9 @@ const User = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
-      references: {
-        model: Estado,
-        key: 'id',
-      }
     },
-  },
-  {
-    // Other model options go here
-  },
+  }
 );
-User.belongsTo(Estado, { foreignKey: 'estado' });
-User.hasMany(Vehiculo, { foreignKey: 'id' });
-//User.sync({ force: true });
+
 
 module.exports = User;
