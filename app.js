@@ -14,6 +14,7 @@ const userroute = require('./controler/user');
 const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
 const cobrosroute = require('./controler/cobros')
+const api = require('./appi/routes')
 
 /**DB */
 const sequelize = require('./db');
@@ -36,6 +37,9 @@ app.use(session({
   secret: 'shhhh, very secret'
 }));
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 console.log(path.join(__dirname, 'public','img', 'favicon.ico'))
@@ -47,6 +51,7 @@ app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
 app.use('/parqueadero',parqueaderoroute)
 app.use('/cobros',cobrosroute)
+app.use('/api',api)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 const User = require('../model/User');
 const Estado = require('../model/Estado');
-const Cobro = require('../model/Cobro');
+const Cobro = require('../model/Cobros');
 const Parqueadero = require('../model/Parqueadero');
 const Vehiculo = require('../model/Vehiculo');
 
-const auth = require('../midleware/auth')
+//const authapi = require('../midleware/auth')
 
 router.get('/', async function (req, res) {
     res.json({ Message: 'Bienvenido esto es una api' })
