@@ -9,7 +9,7 @@ const Vehiculo = require('../model/Vehiculo');
 //const authapi = require('../midleware/auth')
 
 router.get('/', async function (req, res) {
-    res.json({ Message: 'Bienvenido esto es una api' })
+    res.json({ Message: 'Bienvenido Sena' })
 });
 
 router.post('/auth', async function (req, res) {
