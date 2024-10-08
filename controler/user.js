@@ -46,16 +46,17 @@ router.get('/add',auth, async function(req, res) {
   res.render('user/add',{data:{},meesaje:{}});
 });
 
-router.get('/myprofile',auth, async function(req, res) {
-  if (req?.session?.user?.userid){
-    let user = await byid(req?.session?.user?.userid)
-    user = user.toJSON()
-    res.render('user/add',{data:user,meesaje:{}});
+router.get('/myprofile/:id',auth, async function(req, res) {
 
-  }else{
-
+  let userid = req.session.user.userid
+  if(req.params.id && req.params.id != 0){
+    userid = req.params.id
   }
 
+  console.log('userid',userid)
+    let user = await byid(userid)
+    user = user.toJSON()
+    res.render('user/add',{data:user,meesaje:{}});
 });
 
 

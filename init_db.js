@@ -30,13 +30,13 @@ async function initializeDatabase() {
     await User.hasMany(Vehiculo, { foreignKey: 'id' });
     //await User.sync({ force: true });
 
-    await Parqueadero.belongsTo(Estado, { foreignKey: 'tipoveparqueadero', as: 'EstadoparqueaderoRelacion' });
+    await Parqueadero.belongsTo(Estado, { foreignKey:'tipoveparqueadero', as: 'EstadoparqueaderoRelacion' });
     await Parqueadero.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
     //await Parqueadero.sync({ force: true });
 
     await Cobro.belongsTo(Estado, { foreignKey: 'tipoveparqueadero', as: 'TipoParqueaderoRelacion' });
     await Cobro.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-    await Cobro.hasMany(Vehiculo, { foreignKey: 'id' });
+    await Cobro.belongsTo(Vehiculo, { foreignKey: 'vehiculo', as: "vehiculodata" });
     //await Cobro.sync({ force: true });
 
 }

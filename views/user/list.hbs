@@ -15,7 +15,7 @@
   <tbody>
     {{#each datalist}}
         <tr>
-        <td>{{this.id}}</td>
+        <td>{{this.userid}}</td>
         <td>{{this.estado}}</td>
 
 
@@ -24,8 +24,12 @@
         <td>{{this.correo}}</td>
         <td>{{this.documento}}</td>
         <td>
-          <a href="/user/remove/{{this.id}}">
+          <a href="/user/remove/{{this.userid}}">
             <button class="btn btn-danger">Delete</button>
+          </a>
+          
+          <a href="/user/myprofile/{{this.userid}}">
+            <button class="btn btn-success">Edit</button>
           </a>
         </td>
         </tr>

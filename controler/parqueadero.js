@@ -14,7 +14,7 @@ router.get('/', auth,async function(req, res) {
     },
     {
         model: Estado,
-        as: 'EstadoRelacion',
+        as: 'EstadoparqueaderoRelacion',
         attributes: ['NombreEstado'],
     }
   ]
@@ -23,10 +23,11 @@ router.get('/', auth,async function(req, res) {
   const vehiculodata = parqueo.map(parq =>{
      const vehiculoJson = parq.toJSON();
     vehiculoJson.estado = parq.EstadoRelacion.NombreEstado;
+    vehiculoJson.tipoveparqueadero = parq.EstadoparqueaderoRelacion.NombreEstado;
     return vehiculoJson
   } );
 
-
+  console.log('vehiculodata',vehiculodata)
   const values = ["#","Estado","Placa","Tipo Vehiculo","Usuario"]
   res.render('parqueadero/list', {datalist:vehiculodata,headerlist:values});
 });
