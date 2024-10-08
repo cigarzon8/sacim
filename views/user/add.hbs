@@ -3,7 +3,13 @@
 <div class="container-xx3">
 <a href="/user">List</a>
 
-<form  id="useradd" action="/user/add" method="post" class="needs-validation was-validated" novalidate>
+{{#if data.userid}}
+  <form  id="useradd" action="/user/myprofile" method="post" class="needs-validation was-validated" novalidate>
+{{else}}
+  <form  id="useradd" action="/user/add" method="post" class="needs-validation was-validated" novalidate>
+{{/if}}
+
+
 
   <div class="form-group">
     <label for="nombres">Nombres</label>
@@ -60,11 +66,21 @@
     </div>
   </div>
 
+{{#if data.userid}}
+    <input type="hidden" name="userid" id="userid" placeholder="userid" value="{{data.userid}}">
+    <diV>
+        <a>
+            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">guardar</button>
+        </a>
+    </diV>
+
+{{else}}
     <diV>
         <a>
             <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
         </a>
     </diV>
+{{/if}}
 
 </form>
 

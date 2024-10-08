@@ -20,7 +20,6 @@ router.get('/', auth,async function(req, res) {
       return userJson;
     }
     );
-    console.log('usersData',usersData)
     const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]
 
   res.render('user/list', {datalist:usersData,headerlist:values});
@@ -47,8 +46,51 @@ router.get('/add',auth, async function(req, res) {
   res.render('user/add',{data:{},meesaje:{}});
 });
 
+router.get('/myprofile',auth, async function(req, res) {
+  if (req?.session?.user?.userid){
+    let user = await byid(req?.session?.user?.userid)
+    user = user.toJSON()
+    res.render('user/add',{data:user,meesaje:{}});
+
+  }else{
+
+  }
+
+});
+
+
+router.post('/myprofile',auth, async function(req, res) {
+
+  let meesaje = {
+    estado:'success',
+    text:'Usuario Creador correctamente'
+  }
+  try {
+  const user = await User.findOne({id:req.body.userid});
+
+  user.set({
+    nombres: req.body.nombres,
+    apellidos: req.body.apellidos,
+    correo:req.body.correo,
+    password:req.body.password
+  });
+
+  meesaje.text = 'Usuario Actualizado correctamente'
+  user.save();
+
+  res.render('user/add',{data:user.toJSON(),meesaje:meesaje});
+
+  } catch (error) {
+    console.log('error',error)
+    meesaje.estado = 'danger',
+    meesaje.text = 'Correo o documento duplicado'
+    res.render('user/add',{data:req.body,meesaje:meesaje});
+  }
+});
+
+
 router.post('/add',auth, async function(req, res) {
-  console.log('req.body',req.body)
+  console.log('add')
   req.body.estado = 1
   let meesaje = {
     estado:'success',
@@ -68,12 +110,12 @@ router.post('/add',auth, async function(req, res) {
 
   try {
     await user.save();
-    res.render('user/add',{data:{},meesaje:meesaje});
+    return res.render('user/add',{data:{},meesaje:meesaje});
   } catch (error) {
     console.log('error',error)
     meesaje.estado = 'danger',
     meesaje.text = 'Correo o documento duplicado'
-    res.render('user/add',{data:req.body,meesaje:meesaje});
+    return res.render('user/add',{data:req.body,meesaje:meesaje});
   }
 });
 
@@ -88,6 +130,15 @@ async function authenticate(name, pass, fn) {
     where: {
       password: pass,
       correo: name
+    },
+    limit:1
+  });
+}
+
+async function byid(id, fn) {
+  return await User.findOne({
+    where: {
+      userid: id
     },
     limit:1
   });

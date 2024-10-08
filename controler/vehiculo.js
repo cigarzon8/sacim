@@ -7,7 +7,9 @@ const Estado = require('../model/Estado')
 const auth = require('../midleware/auth')
 
 router.get('/', auth,async function(req, res) {
-  const vehiculo = await Vehiculo.findAll({
+  const placa = req.query.placa
+  const filstro = 
+  {
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
@@ -18,8 +20,11 @@ router.get('/', auth,async function(req, res) {
       as: 'TipoVehiculoRelacion',
       attributes: ['NombreEstado'],
     }
-  ]
-  });
+    ]
+  }
+  if (placa) filstro.where = {placa}
+
+  const vehiculo = await Vehiculo.findAll(filstro);
   const vehiculodata = vehiculo.map(vehi =>{
      const vehiculoJson = vehi.toJSON();
     vehiculoJson.estado = vehi.EstadoRelacion.NombreEstado;
