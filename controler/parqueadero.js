@@ -68,7 +68,7 @@ router.post('/add',auth, async function(req, res) {
 });
 
 router.get('/remove/:id',auth, async function(req, res) {
-  const users = await Vehiculo.findOne({id:req.params.id});
+  const users = await Parqueadero.findOne({id:req.params.id});
   await users.destroy()
   res.redirect('/parqueadero');
 });
