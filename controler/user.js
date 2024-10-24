@@ -31,7 +31,11 @@ router.get('/bienvenido',auth, async function(req, res) {
 
 router.post('/auth', async function(req, res) {
   const user = await authenticate(req.body.usuario, req.body.password)
-  if (!user) return res.redirect('/');
+  let meesaje = {
+    estado:'danger',
+    text:'Usuario o contraseña incorrecto'
+  }
+  if (!user) return res.render('login',{meesaje:meesaje});
   req.session.user = user;
   return res.redirect('/user/bienvenido');
 });

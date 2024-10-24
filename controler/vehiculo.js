@@ -62,8 +62,10 @@ router.post('/add',auth, async function(req, res) {
       return res.render('vehiculo/add',{data:req.body,meesaje:meesaje});
     }
   }
+  console.log('req.body',req.body)
   req.body.idusuario = req.body.idusuario.split(' - ')[1]
   req.body.tipovehiculo = req.body.tipovehiculo.split(' - ')[1]
+  console.log('req.body',req.body)
   const vehiculo = new Vehiculo(req.body);
 
   try {

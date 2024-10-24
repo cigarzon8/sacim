@@ -6,6 +6,11 @@
         <p class="subtitle"><b>carros y motos</b></p>
     </div>
     <form action="/user/auth" method="post">
+    {{#if meesaje}}
+        <div class="alert alert-{{meesaje.estado}}" role="alert">
+        {{meesaje.text}}
+        </div>
+    {{/if}}
         <div>
             <label>correo</label>
             <input id="usuario" class="usuario" name="usuario" type="text">

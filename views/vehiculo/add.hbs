@@ -12,7 +12,7 @@
         <input type="text" class="form-control" placeholder="Usuario" list="list-Usuario" name="idusuario" id="idusuario" placeholder="Seleccione usuario" required value="{{data.idusuario}}">
         <datalist id="list-Usuario">
             {{#each userdata}}
-                <option>{{this.nombres}} - {{this.id}}</option>
+                <option>{{this.nombres}} - {{this.userid}}</option>
             {{/each}}
         </datalist>
         <div class="valid-feedback">
