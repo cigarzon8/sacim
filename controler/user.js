@@ -125,7 +125,7 @@ router.post('/add',auth, async function(req, res) {
 });
 
 router.get('/remove/:id',auth, async function(req, res) {
-  const users = await User.findOne({id:req.params.id});
+  const users = await byid(req.params.id);
   await users.destroy()
   res.redirect('/user');
 });

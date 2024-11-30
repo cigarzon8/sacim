@@ -34,7 +34,7 @@ router.get('/', auth,async function(req, res) {
      const vehiculoJson = cob.toJSON();
     vehiculoJson.estado = cob.EstadoRelacion.NombreEstado;
     vehiculoJson.relacion = cob.TipoParqueaderoRelacion.NombreEstado;
-    vehiculoJson.placa = cob.vehiculodata.placa;
+    vehiculoJson.placa = cob?.vehiculodata?.placa;
     return vehiculoJson
   } );
 

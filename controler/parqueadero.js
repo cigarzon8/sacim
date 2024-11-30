@@ -68,10 +68,17 @@ router.post('/add',auth, async function(req, res) {
 });
 
 router.get('/remove/:id',auth, async function(req, res) {
-  const users = await Parqueadero.findOne({id:req.params.id});
+  const users = await byid(req.params.id);
   await users.destroy()
   res.redirect('/parqueadero');
 });
-
+async function byid(id, fn) {
+  return await Parqueadero.findOne({
+    where: {
+      id: id
+    },
+    limit:1
+  });
+}
 
 module.exports = router;
