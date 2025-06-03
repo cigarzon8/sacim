@@ -42,6 +42,11 @@ const User = sequelize.define(
       allowNull: false,
       required: true,
     },
+    proyecto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
   }
 );
 

@@ -6,7 +6,7 @@ const Vehiculo = require('./model/Vehiculo');
 const User = require('./model/User');
 const Parqueadero = require('./model/Parqueadero');
 const Cobro = require('./model/Cobros')
-
+const Proyecto = require('./model/Proyecto')
 async function initializeDatabase() {
     /*await Estado.sync({ force: true });
     await Estado.bulkCreate([
@@ -26,10 +26,28 @@ async function initializeDatabase() {
     
     //await Vehiculo.sync({ force: true });
 
-    await User.belongsTo(Estado, { foreignKey: 'estado' });
-    await User.hasMany(Vehiculo, { foreignKey: 'id' });
-    //await User.sync({ force: true });
 
+    await Proyecto.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
+    /*await Proyecto.sync({ force: true });
+    await Proyecto.create({
+        nombre: 'Proyecto 1 buenos aires',
+        estado: 1,
+    })*/
+
+    await User.belongsTo(Estado, { foreignKey: 'estado' });
+    await User.belongsTo(Proyecto, { foreignKey: 'proyecto' });
+    await User.sync({ force: true })
+    //await User.hasMany(Vehiculo, { foreignKey: 'id' });
+    /*;
+    await User.create({
+    nombres: 'Juan',
+    apellidos: 'Pérez',
+    correo: '123456@123456.com',
+    documento: 123456,
+    password: 123456,
+    estado: 1,
+    });*/
+    
     await Parqueadero.belongsTo(Estado, { foreignKey:'tipoveparqueadero', as: 'EstadoparqueaderoRelacion' });
     await Parqueadero.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
     //await Parqueadero.sync({ force: true });

@@ -1,0 +1,12 @@
+name: sacim
+services:
+  mysql:
+    type: mysql:8.0
+    portforward: true
+    creds:
+      user: root
+      password: root
+      database: mi_basedatos
+tooling:
+  mysql:
+    service: mysql
