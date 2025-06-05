@@ -28,23 +28,23 @@ async function initializeDatabase() {
 
 
     await Proyecto.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-    /*await Proyecto.sync({ force: true });
-    await Proyecto.create({
+    //await Proyecto.sync({ force: true });
+    /*await Proyecto.create({
         nombre: 'Proyecto 1 buenos aires',
         estado: 1,
     })*/
 
     await User.belongsTo(Estado, { foreignKey: 'estado' });
     await User.belongsTo(Proyecto, { foreignKey: 'proyecto' });
-    await User.sync({ force: true })
-    //await User.hasMany(Vehiculo, { foreignKey: 'id' });
-    /*;
-    await User.create({
+    //await User.sync({ force: true })
+    //await User.hasMany(Vehiculo, { foreignKey: 'id' });;
+    /*await User.create({
     nombres: 'Juan',
     apellidos: 'Pérez',
     correo: '123456@123456.com',
     documento: 123456,
     password: 123456,
+    proyecto: 1,
     estado: 1,
     });*/
     

@@ -1,0 +1,33 @@
+{{> layout}}
+{{> nav}}
+<div class="container-xx3">
+<a href="/proyecto">List</a>
+
+<form  id="useradd" action="/proyecto/add" method="post" class="needs-validation was-validated" novalidate>
+
+  <div class="form-group">
+
+    <div class="form-group">
+        <label for="input-datalist">Nombre de Proyecto</label>
+    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Proyecto 1" autocomplete="off" required value="{{data.nombre}}">
+        <div class="valid-feedback">
+        ok!
+        </div>
+        <div class="invalid-feedback">
+        Asigne un nombre.
+        </div>
+    </div>
+
+  </div>
+
+    <diV>
+        <a>
+            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
+        </a>
+    </diV>
+
+</form>
+
+</div>
+
+{{> footer}}

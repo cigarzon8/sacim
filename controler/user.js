@@ -56,8 +56,6 @@ router.get('/myprofile/:id',auth, async function(req, res) {
   if(req.params.id && req.params.id != 0){
     userid = req.params.id
   }
-
-  console.log('userid',userid)
     let user = await byid(userid)
     user = user.toJSON()
     res.render('user/add',{data:user,meesaje:{}});
@@ -110,7 +108,7 @@ router.post('/add',auth, async function(req, res) {
       return res.render('user/add',{data:req.body,meesaje:meesaje});
     }
   }
-
+  req.body.proyecto = req.session.user.proyecto
   const user = new User(req.body);
 
   try {

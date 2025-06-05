@@ -15,7 +15,7 @@ const Proyecto = sequelize.define(
         allowNull: false,
         required: true,
       },
-      estado: {
+    estado: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,

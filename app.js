@@ -14,6 +14,7 @@ const userroute = require('./controler/user');
 const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
 const cobrosroute = require('./controler/cobros')
+const proyecto = require('./controler/Proyecto')
 const api = require('./appi/routes')
 
 /**DB */
@@ -51,6 +52,8 @@ app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
 app.use('/parqueadero',parqueaderoroute)
 app.use('/cobros',cobrosroute)
+app.use('/proyecto',proyecto)
+
 app.use('/api',api)
 
 app.listen(port, () => {
