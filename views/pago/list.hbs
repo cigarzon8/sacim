@@ -1,0 +1,42 @@
+{{> layout}}
+{{> header}}
+{{> nav}}
+<div class="container-xx3">
+<a href="/movimientos/add"><td><button class="btn btn-primary">Agregar</button></td></a>
+
+<table class="table">
+  <thead>
+    <tr>
+    {{#each headerlist}}
+        <th scope="row">{{this}}</th>
+    {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each datalist}}
+        <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.placa}}</td>
+        <td>{{this.estado}}</td>
+        <td>{{this.idIngreso}}</td>
+        <td>{{this.idSalida}}</td>
+        <td>{{this.tiporenta}}</td>
+        <td>{{this.proyecto}}</td>
+        <td>{{this.Valor}} cop</td>
+        <td>
+          {{#if facturaElectronica}}
+            <span class="text-success">✔️</span>
+          {{else}}
+            <span class="text-danger">❌</span>
+          {{/if}}
+        </td>
+        <td>{{this.usuario}}</td>
+        </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+
+</div>
+
+{{> footer}}
