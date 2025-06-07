@@ -15,6 +15,8 @@ const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
 const cobrosroute = require('./controler/cobros')
 const proyecto = require('./controler/Proyecto')
+const movimientos = require('./controler/Movimientos')
+const pagos = require('./controler/Pagos')
 const api = require('./appi/routes')
 
 /**DB */
@@ -53,6 +55,8 @@ app.use('/vehiculo',vehiculeroute)
 app.use('/parqueadero',parqueaderoroute)
 app.use('/cobros',cobrosroute)
 app.use('/proyecto',proyecto)
+app.use('/movimientos',movimientos)
+app.use('/pagos',pagos)
 
 app.use('/api',api)
 

@@ -7,9 +7,12 @@ const User = require('./model/User');
 const Parqueadero = require('./model/Parqueadero');
 const Cobro = require('./model/Cobros')
 const Proyecto = require('./model/Proyecto')
+const Movimiento = require('./model/Movimientos')
+const Pago = require('./model/Pago')
+
 async function initializeDatabase() {
-    /*await Estado.sync({ force: true });
-    await Estado.bulkCreate([
+    //await Estado.sync({ force: true });
+    /*await Estado.bulkCreate([
         { id: 1, NombreEstado: 'Activo', seccion: 'General' },
         { id: 2, NombreEstado: 'Inactivo', seccion: 'General' },
         { id: 3, NombreEstado: 'Pendiente', seccion: 'Administrativo' },
@@ -19,7 +22,13 @@ async function initializeDatabase() {
         { id: 7, NombreEstado: 'Ingreso', seccion: 'cobro' },
         { id: 8, NombreEstado: 'Salida', seccion: 'cobro' },
         { id: 9, NombreEstado: 'Pagado', seccion: 'cobro' },
+        { id: 10, NombreEstado: 'Pango Hora', seccion: 'pagos' },
+        { id: 11, NombreEstado: 'Pango Dia', seccion: 'pagos' },
+        { id: 12, NombreEstado: 'Pango Semana', seccion: 'pagos' },
+        { id: 13, NombreEstado: 'Pango Mes', seccion: 'pagos' },
     ]);*/
+    //await Movimiento.sync({ force: true });
+    await Movimiento.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
 
     await Vehiculo.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
     await Vehiculo.belongsTo(Estado, { foreignKey: 'tipovehiculo', as: 'TipoVehiculoRelacion' });
@@ -56,6 +65,16 @@ async function initializeDatabase() {
     await Cobro.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
     await Cobro.belongsTo(Vehiculo, { foreignKey: 'vehiculo', as: "vehiculodata" });
     //await Cobro.sync({ force: true });
+
+
+    
+    await Pago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
+    await Pago.belongsTo(Estado, { foreignKey: 'tiporenta', as: 'EstadoTiporenta' });
+    await Pago.belongsTo(Movimiento, { foreignKey: 'idIngreso', as: 'EstadoidIngreso' });
+    await Pago.belongsTo(Movimiento, { foreignKey: 'idSalida', as: 'EstadoidSalida' });    
+    await Pago.belongsTo(User, { foreignKey: 'usuario', as: 'EstadoUsuario' });    
+    await Pago.belongsTo(Proyecto, { foreignKey: 'proyecto', as: 'EstadoProyecto'  });    
+    //await Pago.sync({ force: true });
 
 }
 initializeDatabase()

@@ -1,0 +1,36 @@
+{{> layout}}
+{{> nav}}
+<div class="container-xx3">
+<a href="/movimientos">List</a>
+
+<form  id="useradd" action="/movimientos/add" method="post" class="needs-validation was-validated" novalidate>
+
+  <div class="form-group">
+
+    <div class="form-group">
+        <label for="input-datalist">Placa</label>
+    <input type="text" class="form-control" name="placa" id="placa" placeholder="ABC2123" autocomplete="off" required value="{{data.nombre}}">
+
+        <div class="valid-feedback">
+        ok!
+        </div>
+        <div class="invalid-feedback">
+        Asigne un Placa.
+        </div>
+    </div>
+
+  </div>
+
+    <diV>
+        <a>
+            <button class="btn btn-success" name="estado" type="submit" value="Ingresar" id="ingresar">Ingreso</button>
+        </a>
+        <a>
+            <button class="btn btn-danger" name="estado" type="submit" value="Salida" id="Salida">Salida</button>
+        </a>
+    </diV>
+</form>
+
+</div>
+
+{{> footer}}
