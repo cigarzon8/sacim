@@ -54,7 +54,13 @@ router.post('/add',auth, async function(req, res) {
 
   try {
     const moviemtosnuevo = await movimiento.save();
-    savepago(moviemtosnuevo.toJSON())
+    if (req.body.estado == 7){
+      savepago(moviemtosnuevo.toJSON())
+    }
+    if (req.body.estado == 8){
+      
+      exitSavePago(moviemtosnuevo.toJSON())
+    }
 
     res.redirect('/movimientos');
   } catch (error) {
@@ -69,7 +75,7 @@ async function savepago(idingreso,idsalida=0) {
     tiporenta:10,
     estado:1,
     idIngreso:idingreso.id,
-    idSalida:1,
+    idSalida:idingreso.id,
     pagoEstado:7,
     usuario:1,
     proyecto:1,
@@ -78,6 +84,25 @@ async function savepago(idingreso,idsalida=0) {
 
   }
   const pago = new Pagos(pagonuevo).save();
+}
+
+async function exitSavePago(idingreso) {
+  const pagos = await find(idingreso.placa);
+  console.log('pagos',pagos)
+}
+
+async function find(placa) {
+  return await Pagos.findOne({
+    where: {
+      placa: placa,
+      estado:1,
+      pagoEstado:7,
+      usuario:1,
+      proyecto:1,
+      Valor:0
+    },
+    limit:1
+  });
 }
 
 module.exports = router;

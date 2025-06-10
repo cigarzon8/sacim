@@ -9,6 +9,7 @@ const Cobro = require('./model/Cobros')
 const Proyecto = require('./model/Proyecto')
 const Movimiento = require('./model/Movimientos')
 const Pago = require('./model/Pago')
+const Valores = require('./model/Valores')
 
 async function initializeDatabase() {
     //await Estado.sync({ force: true });
@@ -29,6 +30,17 @@ async function initializeDatabase() {
     ]);*/
     //await Movimiento.sync({ force: true });
     await Movimiento.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
+
+
+    //await Valores.sync({ force: true });
+    await Valores.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });    
+    /*await Valores.bulkCreate([
+        { valor: 1, estado: 10},
+        { valor: 1, estado: 11},
+        { valor: 1, estado: 12},
+        { valor: 1, estado: 13},
+    ]);*/
+
 
     await Vehiculo.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
     await Vehiculo.belongsTo(Estado, { foreignKey: 'tipovehiculo', as: 'TipoVehiculoRelacion' });

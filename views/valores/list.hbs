@@ -1,0 +1,46 @@
+{{> layout}}
+{{> header}}
+{{> nav}}
+
+<div class="container-xxl mt-4">
+
+  <form id="useradd" action="/valores/add" method="post" class="needs-validation was-validated" novalidate>
+    <table class="table">
+      <thead>
+        <tr>
+          {{#each headerlist}}
+            <th scope="col">{{this}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each datalist}}
+          <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.estado}}</td>
+            <td>
+              <input type="text"
+                     class="form-control w-auto d-inline-block"
+                     name="{{this.id}}"
+                     id="{{this.id}}"
+                     placeholder="123"
+                     autocomplete="off"
+                     required
+                     value="{{this.valor}}">
+              <div class="valid-feedback">ok!</div>
+              <div class="invalid-feedback">Asigne un valor.</div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <!-- Botones abajo, centrados -->
+    <div class="text-center mt-4">
+      <button class="btn btn-success me-2" name="estado" type="submit" value="Ingresar" id="ingresar">Guardar</button>
+    </div>
+  </form>
+
+</div>
+
+{{> footer}}

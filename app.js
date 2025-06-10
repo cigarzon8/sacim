@@ -17,6 +17,8 @@ const cobrosroute = require('./controler/cobros')
 const proyecto = require('./controler/Proyecto')
 const movimientos = require('./controler/Movimientos')
 const pagos = require('./controler/Pagos')
+const valores = require('./controler/Valores')
+
 const api = require('./appi/routes')
 
 /**DB */
@@ -57,6 +59,7 @@ app.use('/cobros',cobrosroute)
 app.use('/proyecto',proyecto)
 app.use('/movimientos',movimientos)
 app.use('/pagos',pagos)
+app.use('/valores',valores)
 
 app.use('/api',api)
 
