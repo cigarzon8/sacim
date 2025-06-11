@@ -3,6 +3,8 @@ var router = express.Router();
 const Movimiento = require('../model/Movimientos');
 const Estado = require('../model/Estado')
 const Pagos = require('../model/Pago')
+const Valores = require('../model/Valores')
+
 const auth = require('../midleware/auth')
 
 router.get('/', auth,async function(req, res) {
@@ -57,6 +59,7 @@ router.post('/add',auth, async function(req, res) {
     if (req.body.estado == 7){
       savepago(moviemtosnuevo.toJSON())
     }
+    console.log('req.body.estado',req.body.estado)
     if (req.body.estado == 8){
       
       exitSavePago(moviemtosnuevo.toJSON())
@@ -72,7 +75,7 @@ router.post('/add',auth, async function(req, res) {
 async function savepago(idingreso,idsalida=0) {
   const pagonuevo ={
     placa:idingreso.placa,
-    tiporenta:10,
+    tiporenta:1,
     estado:1,
     idIngreso:idingreso.id,
     idSalida:idingreso.id,
@@ -88,11 +91,29 @@ async function savepago(idingreso,idsalida=0) {
 
 async function exitSavePago(idingreso) {
   const pagos = await find(idingreso.placa);
-  console.log('pagos',pagos)
+  if (pagos){
+  const createdAt = new Date(pagos.dataValues.createdAt);
+  const ahora = new Date();
+  console.log('ahora',ahora)
+  console.log('createdAt',createdAt)
+  const diferenciaMs = ahora - createdAt;
+  console.log('diferenciaMs',diferenciaMs)
+  const minutosPasados = Math.floor(diferenciaMs / 1000 / 60);
+  console.log('minutosPasados',minutosPasados)
+  pagos.Valor = 5;
+  //await pagos.save();
+  }
+
 }
+
 
 async function find(placa) {
   return await Pagos.findOne({
+    include: [{
+      model: Valores,
+      as: 'EstadoValor',
+      attributes: ['valor']
+    }],
     where: {
       placa: placa,
       estado:1,

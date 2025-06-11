@@ -81,11 +81,12 @@ async function initializeDatabase() {
 
     
     await Pago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-    await Pago.belongsTo(Estado, { foreignKey: 'tiporenta', as: 'EstadoTiporenta' });
+    //await Pago.belongsTo(Estado, { foreignKey: 'tiporenta', as: 'EstadoTiporenta' });
     await Pago.belongsTo(Movimiento, { foreignKey: 'idIngreso', as: 'EstadoidIngreso' });
     await Pago.belongsTo(Movimiento, { foreignKey: 'idSalida', as: 'EstadoidSalida' });    
     await Pago.belongsTo(User, { foreignKey: 'usuario', as: 'EstadoUsuario' });    
     await Pago.belongsTo(Proyecto, { foreignKey: 'proyecto', as: 'EstadoProyecto'  });    
+    await Pago.belongsTo(Valores, { foreignKey: 'tiporenta',as: 'EstadoValor' });
     //await Pago.sync({ force: true });
 
 }
