@@ -1,6 +1,52 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xxl">
+    <!-- contact section -->
+
+    <section class="contact_section layout_padding">
+      <div class="custom_heading-container">
+        <h3 class=" ">
+          SACIM Ingreso
+        </h3>
+      </div>
+      <div class="container layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <form action="/user/auth" method="post">
+            {{#if meesaje}}
+                <div class="alert alert-{{meesaje.estado}}" role="alert">
+                {{meesaje.text}}
+                </div>
+            {{/if}}
+              <div>
+                <!--label>correo</label-->
+                <input placeholder="Correo" id="usuario" class="usuario" name="usuario" type="text">
+              </div>
+              <div>
+            <!--label>contraseña</label-->
+            <input  placeholder="Contraseña"  id="password" class="password" name="password" type="password">
+            <i id="eye" class="fas fa-eye-slash" onclick="showpassword('password','eye')"></i>
+              <div class="d-flex justify-content-center ">
+                <button>
+                  Ingresar
+                </button>
+              </div>
+
+            </form>
+
+            
+        <div class="container layout_padding2-top  justify-content-center ">
+            <a href="" id="rc">Recuperar contraseña</a>
+        </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- end contact section -->
+
+<!--div class="container-xxl">
     <div>
         <P class="principalname"><b>SACIM</b></P>
         <p class="subtitle"><b>carros y motos</b></p>
@@ -16,9 +62,7 @@
             <input id="usuario" class="usuario" name="usuario" type="text">
         </div>
         <div>
-            <label>contraseña</label>
-            <input id="password" class="password" name="password" type="password">
-            <i id="eye" class="fas fa-eye-slash" onclick="showpassword('password','eye')"></i>
+
         </div>
     <diV>
         <a>
@@ -31,6 +75,6 @@
         <a href="" id="rc">Recuperar contraseña</a>
     </div>
 
-</div>
+</div-->
 
 {{> footer}}
