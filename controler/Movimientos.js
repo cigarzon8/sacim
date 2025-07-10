@@ -94,14 +94,9 @@ async function exitSavePago(idingreso) {
   if (pagos){
   const createdAt = new Date(pagos.dataValues.createdAt);
   const ahora = new Date();
-  console.log('ahora',ahora)
-  console.log('createdAt',createdAt)
-  const diferenciaMs = ahora - createdAt;
-  console.log('diferenciaMs',diferenciaMs)
-  const minutosPasados = Math.floor(diferenciaMs / 1000 / 60);
-  console.log('minutosPasados',minutosPasados)
-  pagos.Valor = 5;
-  //await pagos.save();
+  const minutosPasados = Math.floor((ahora - createdAt) / 1000 / 60)*pagos?.EstadoValor?.valor;
+  pagos.Valor = minutosPasados;
+  await pagos.save();
   }
 
 }

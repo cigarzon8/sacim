@@ -20,7 +20,17 @@ const Proyecto = sequelize.define(
         allowNull: false,
         required: true,
       },
-  }
+    tiempogratuito: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
+      },
+    tiempoalertas: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
+      },
+    }
 );
 
 
