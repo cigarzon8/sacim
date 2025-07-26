@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Pago = require('../model/Pago');
 const Estado = require('../model/Estado')
-const User = require('../model/User');
+const User = require('../model/Usuario');
 const Proyecto = require('../model/Proyecto')
 const Movimiento = require('../model/Movimientos')
 

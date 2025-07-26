@@ -1,18 +1,17 @@
 const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
-const Estado = require('./Estado')
 
 const Vehiculo = sequelize.define(
   'Vehiculo',
   {
-    idusuario: {
+    id_vehiculo: {
       type: DataTypes.INTEGER,
-      allowNull: false,      
-      required: false
+      primaryKey: true,
+      autoIncrement: true,
     },
     placa: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10),
       allowNull: false,
       required: true,
       unique: true,
@@ -22,10 +21,31 @@ const Vehiculo = sequelize.define(
       allowNull: false,
       required: true,
     },
+    tipofacturacion: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
     estado: {
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
+    },
+    id_proyecto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    parqueadero_asignado: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      required: true,
+      unique: true,
+    },
+    tipousuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
     },
   }
 );

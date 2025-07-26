@@ -2,26 +2,26 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
 
-const User = sequelize.define(
-  'User',
+const Usuario = sequelize.define(
+  'Usuario',
   {
-    userid: {
+    id_usuario: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     nombres: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
       required: true,
     },
     apellidos: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,      
       required: true,
     },
     correo: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
       required: true,
       unique: true,
@@ -33,7 +33,7 @@ const User = sequelize.define(
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
       required: true,
     },
@@ -42,7 +42,17 @@ const User = sequelize.define(
       allowNull: false,
       required: true,
     },
-    proyecto: {
+    tipo_documento: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    id_proyecto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    id_rol: {
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
@@ -51,4 +61,4 @@ const User = sequelize.define(
 );
 
 
-module.exports = User;
+module.exports = Usuario;

@@ -3,7 +3,7 @@ var router = express.Router();
 const Estado = require('../model/Estado')
 const Cobros = require('../model/Cobros');
 const Vehiculo = require('../model/Vehiculo');
-const User = require('../model/User');
+const User = require('../model/Usuario');
 
 const moment = require('moment');
 

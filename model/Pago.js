@@ -5,61 +5,61 @@ const sequelize = require('../db.js');
 const Pago = sequelize.define(
   'Pago',
   {
-    id: {
+    id_pago: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    placa: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        required: true,
-      },
+    id_vehiculo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    estado: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    id_movimiento_ngreso: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    id_movimiento_salida: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    estado_pago: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
     tiporenta: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
       },
-      estado: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      },
-      idIngreso: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      },
-      idSalida: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      },
-       pagoEstado: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      },
-       usuario: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      }, 
-       proyecto: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      }, 
-       Valor: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-      }, 
-       facturaElectronica: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        required: true,
-      }, 
+    id_usuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    }, 
+    id_proyecto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    }, 
+    Valor: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    }, 
+    duracion_parqueo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    }
     }
 );
 

@@ -4,18 +4,23 @@ const sequelize = require('../db.js');
 const Estado = sequelize.define(
   'Estado',
   {
-    id: {
+    id_estado: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: false,
       },
-    NombreEstado: {
-      type: DataTypes.STRING,
+    nombre_estado: {
+      type: DataTypes.STRING(100),
       allowNull: false,
       required: true,
     },
-    seccion: {
-      type: DataTypes.STRING,
+    categoria: {
+      type: DataTypes.STRING(100),
+      allowNull: false,      
+      required: true,
+    },
+    id_categoria: {
+      type: DataTypes.INTEGER(10),
       allowNull: false,      
       required: true,
     }

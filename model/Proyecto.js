@@ -5,13 +5,13 @@ const sequelize = require('../db.js');
 const Proyecto = sequelize.define(
   'Proyecto',
   {
-    id: {
+    id_proyecto: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    nombre: {
-        type: DataTypes.STRING,
+    nombre_proyecto: {
+        type: DataTypes.STRING(150),
         allowNull: false,
         required: true,
       },
@@ -30,6 +30,16 @@ const Proyecto = sequelize.define(
         allowNull: false,
         required: true,
       },
+    telefono: {
+        type: DataTypes.INTEGER(10),
+        allowNull: false,
+        required: true,
+      },
+    correo: {
+        type: DataTypes.STRING(150),
+        allowNull: false,
+        required: true,
+      }
     }
 );
 

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../model/User');
+const User = require('../model/Usuario');
 const Estado = require('../model/Estado');
 const Cobro = require('../model/Cobros');
 const Parqueadero = require('../model/Parqueadero');

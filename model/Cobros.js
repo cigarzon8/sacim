@@ -5,7 +5,7 @@ const sequelize = require('../db.js');
 const Cobro = sequelize.define(
   'Cobro',
   {
-    id: {
+    id_cobro: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -21,12 +21,12 @@ const Cobro = sequelize.define(
         required: true,
       },
       fechainicio: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
       },
       fechafin: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
       },

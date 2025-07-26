@@ -2,10 +2,10 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
 
-const Movimiento = sequelize.define(
-  'Movimiento',
+const Pagoproyecto = sequelize.define(
+  'Pagoproyecto',
   {
-    id_movimiento: {
+    id_pago_proyecto: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -15,7 +15,7 @@ const Movimiento = sequelize.define(
         allowNull: false,
         required: true,
       },
-    id_vehiculo: {
+    pagoestado: {
         type: DataTypes.INTEGER,
         allowNull: false,
         required: true,
@@ -24,9 +24,20 @@ const Movimiento = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
-    },
-    tipo_movimiento: {
+    }, 
+    valor: {
       type: DataTypes.INTEGER,
+      allowNull: true,
+      required: true,
+      defaultValue:0
+    }, 
+    fecha_fin_licencia: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      required: true,
+    }, 
+    fecha_inici_licencia: {
+      type: DataTypes.DATE,
       allowNull: false,
       required: true,
     }
@@ -34,4 +45,4 @@ const Movimiento = sequelize.define(
 );
 
 
-module.exports = Movimiento;
+module.exports = Pagoproyecto;

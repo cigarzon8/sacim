@@ -18,7 +18,6 @@ const proyecto = require('./controler/Proyecto')
 const movimientos = require('./controler/Movimientos')
 const pagos = require('./controler/Pagos')
 const valores = require('./controler/Valores')
-
 const api = require('./appi/routes')
 
 /**DB */

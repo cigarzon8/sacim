@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const Vehiculo = require('../model/Vehiculo');
-const User = require('../model/User');
+const User = require('../model/Usuario');
 const Estado = require('../model/Estado')
 const auth = require('../midleware/auth')
 

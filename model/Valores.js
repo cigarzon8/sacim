@@ -5,7 +5,7 @@ const sequelize = require('../db.js');
 const Valores = sequelize.define(
   'valores',
   {
-    id: {
+    id_valor: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -20,7 +20,22 @@ const Valores = sequelize.define(
         allowNull: false,
         required: true,
       },
-  }
+    tipovehiculo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    tipofacturacion: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    id_proyecto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    }
+    }
 );
 
 
