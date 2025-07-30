@@ -31,3 +31,78 @@
 </div>
 
 {{> footer}}
+
+
+
+
+{{> layout}}
+{{> nav}}
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Nombre de Proyecto
+        </h3>
+    </div>
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form action="/proyecto/add" method="post">
+                    {{#if meesaje}}
+                    <div class="alert alert-{{meesaje.estado}}" role="alert">
+                        {{meesaje.text}}
+                    </div>
+                    {{/if}}
+                    <div>
+                        <!--label>correo</label-->
+                        <input placeholder="Correo" id="usuario" class="usuario" name="usuario" type="text">
+                    </div>
+                    <div>
+                        <!--label>contraseña</label-->
+                        <input placeholder="Contraseña" id="password" class="password" name="password" type="password">
+                        <i id="eye" class="fas fa-eye-slash" onclick="showpassword('password','eye')"></i>
+                        <div class="d-flex justify-content-center ">
+                            <button>
+                                Ingresar
+                            </button>
+                        </div>
+
+  <div class="form-group">
+<a href="/proyecto">List</a>
+    <div class="form-group">
+        <label for="input-datalist">Nombre de Proyecto</label>
+    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Proyecto 1" autocomplete="off" required value="{{data.nombre}}">
+        <div class="valid-feedback">
+        ok!
+        </div>
+        <div class="invalid-feedback">
+        Asigne un nombre.
+        </div>
+    </div>
+
+  </div>
+
+    <div class="d-flex justify-content-center ">
+        <a>
+            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Guardar</button>
+        </a>
+    </div>
+
+
+                </form>
+
+
+                <div class="">
+                    <a href="" id="rc">Recuperar contraseña</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{{> footer}}

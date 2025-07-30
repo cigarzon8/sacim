@@ -10,19 +10,18 @@ router.get('/', auth,async function(req, res) {
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
-      attributes: ['NombreEstado'],
+      attributes: ['nombre_estado'],
     }
   ]
   });
 
-  const vehiculodata = proyecto.map(parq =>{
-     const vehiculoJson = parq.toJSON();
-    vehiculoJson.estado = parq.EstadoRelacion.NombreEstado;
-    return vehiculoJson
-  } );
+  const proyectodata = proyecto.map(data => {
+    data.dataValues.estado = data.EstadoRelacion.nombre_estado;
+    return data.dataValues
+  })
 
-  const values = ["#","Nombre","Estado","Fecha creacion"]
-  res.render('proyecto/list', {datalist:vehiculodata,headerlist:values});
+  const values = ["#","Nombre","Estado","Correo","Fecha creacion","Telefono","Acciones"]
+  res.render('proyecto/list', {datalist:proyectodata,headerlist:values});
 });
 
 
@@ -62,6 +61,10 @@ router.get('/remove/:id',auth, async function(req, res) {
   const users = await byid(req.params.id);
   await users.destroy()
   res.redirect('/proyecto');
+});
+router.get('/editar/:id',auth, async function(req, res) {
+  const values = ["#","Nombre","Estado","Correo","Fecha creacion","Telefono","Acciones"]
+  res.render('proyecto/add');
 });
 async function byid(id, fn) {
   return await Proyecto.findOne({

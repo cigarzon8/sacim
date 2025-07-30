@@ -1,35 +1,58 @@
 {{> layout}}
 {{> header}}
 {{> nav}}
-<div class="container-xx3">
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Proyectos
+        </h3>
+    </div>
 <a href="/proyecto/add"><td><button class="btn btn-primary">Agregar</button></td></a>
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
 
-<table class="table">
-  <thead>
-    <tr>
-    {{#each headerlist}}
-        <th scope="row">{{this}}</th>
-    {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#each datalist}}
-        <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.nombre}}</td>
-        <td>{{this.estado}}</td>
-        <td>{{this.createdAt}}</td>
-        <td>
-          <a href="/proyecto/remove/{{this.id}}">
-            <button class="btn btn-danger">Delete</button>
-          </a>
-        </td>
-        </tr>
-    {{/each}}
 
-  </tbody>
-</table>
+                <table class="table">
+                <thead>
+                    <tr>
+                    {{#each headerlist}}
+                        <th scope="row">{{this}}</th>
+                    {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each datalist}}
+                        <tr>
+                          <td>{{this.id_proyecto}}</td>
+                          <td>{{this.nombre_proyecto}}</td>
+                          <td>{{this.estado}}</td>
+                          <td>{{this.correo}}</td>
+                          <td>{{this.createdAt}}</td>
+                          <td>{{this.telefono}}</td>
+                          <td>
+                            <a href="/proyecto/remove/{{this.id}}">
+                              <button class="btn btn-danger">Eliminar</button>
+                            </a>
+                            <a href="/proyecto/editar/{{this.id_proyecto}}">
+                              <button class="btn btn-success">Editar</button>
+                            </a>
+                          </td>
+                        </tr>
+                    {{/each}}
 
-</div>
+                </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
 {{> footer}}

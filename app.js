@@ -19,7 +19,7 @@ const movimientos = require('./controler/Movimientos')
 const pagos = require('./controler/Pagos')
 const valores = require('./controler/Valores')
 const api = require('./appi/routes')
-
+const estados = require('./controler/Estados')
 /**DB */
 const sequelize = require('./db');
 
@@ -51,11 +51,16 @@ app.get('/', (req, res) => {
     res.render('login');
 });
 
+
+
+app.use('/estados', estados);
+app.use('/proyecto',proyecto)
+
 app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
 app.use('/parqueadero',parqueaderoroute)
 app.use('/cobros',cobrosroute)
-app.use('/proyecto',proyecto)
+
 app.use('/movimientos',movimientos)
 app.use('/pagos',pagos)
 app.use('/valores',valores)
