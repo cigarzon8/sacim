@@ -1,101 +1,110 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/proyecto">List</a>
-
-<form  id="useradd" action="/proyecto/add" method="post" class="needs-validation was-validated" novalidate>
-
-  <div class="form-group">
-
-    <div class="form-group">
-        <label for="input-datalist">Nombre de Proyecto</label>
-    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Proyecto 1" autocomplete="off" required value="{{data.nombre}}">
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Asigne un nombre.
-        </div>
-    </div>
-
-  </div>
-
-    <diV>
-        <a>
-            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
-        </a>
-    </diV>
-
-</form>
-
-</div>
-
-{{> footer}}
-
-
-
-
-{{> layout}}
-{{> nav}}
 <!-- contact section -->
 
 <section class="contact_section layout_padding">
     <div class="custom_heading-container">
         <h3 class=" ">
-            Nombre de Proyecto
+            Proyecto {{data.nombre_proyecto}}
         </h3>
     </div>
+    <br>
+
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/proyecto">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
+    </div>
+
     <div class="container layout_padding2-top">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="/proyecto/add" method="post">
-                    {{#if meesaje}}
-                    <div class="alert alert-{{meesaje.estado}}" role="alert">
-                        {{meesaje.text}}
-                    </div>
-                    {{/if}}
-                    <div>
-                        <!--label>correo</label-->
-                        <input placeholder="Correo" id="usuario" class="usuario" name="usuario" type="text">
-                    </div>
-                    <div>
-                        <!--label>contraseña</label-->
-                        <input placeholder="Contraseña" id="password" class="password" name="password" type="password">
-                        <i id="eye" class="fas fa-eye-slash" onclick="showpassword('password','eye')"></i>
-                        <div class="d-flex justify-content-center ">
-                            <button>
-                                Ingresar
-                            </button>
+
+
+
+                <form action="/proyecto/add" method="post" class="needs-validation">
+
+                    <div class="form-group">
+
+                        <!--Nombre-->
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                name="nombre_proyecto" 
+                                id="nombre_proyecto" 
+                                placeholder="Nombre del proyecto"
+                                autocomplete="off" 
+                                minlength="5" 
+                                value="{{data.nombre_proyecto}}"
+                                required>
+
+                            <div class="invalid-feedback">
+                                Asigne un nombre que sea mayor a 5 caracteres.
+                            </div>
                         </div>
 
-  <div class="form-group">
-<a href="/proyecto">List</a>
-    <div class="form-group">
-        <label for="input-datalist">Nombre de Proyecto</label>
-    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Proyecto 1" autocomplete="off" required value="{{data.nombre}}">
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Asigne un nombre.
-        </div>
-    </div>
+                        <div class="form-group">
+                            <input 
+                                placeholder="Correo electronico" 
+                                id="correo" 
+                                name="correo" 
+                                type="email" 
+                                class="form-control correo" 
+                                minlength="5" 
+                                value="{{data.correo}}" 
+                                required>
 
-  </div>
+                            <div class="invalid-feedback">
+                                Asigne un correo electronico valido.
+                            </div>
+                        </div>
 
-    <div class="d-flex justify-content-center ">
-        <a>
-            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Guardar</button>
-        </a>
-    </div>
+
+
+                        <div class="form-group">
+                            <input  
+                                placeholder="Teléfono" 
+                                id="telefono"  
+                                class="form-control form-control" 
+                                name="telefono" 
+                                type="number"
+                                min="999999"
+                                max="9999999999" 
+                                value="{{data.telefono}}"
+                                required>
+                            <div class="valid-feedback">
+                                ok!
+                            </div>
+                            <div class="invalid-feedback">
+                                Asigne un Telefono, minimo 7 caracteres.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input placeholder="Tiempo Gratuito" id="tiempogratuito" class="form-control tiempogratuito" name="tiempogratuito" type="number" value="{{data.tiempogratuito}}">
+                        </div>
+
+                        <div class="form-group">
+                            <input placeholder="Tiempo Alertas" id="tiempoalertas" class="form-control tiempoalertas" name="tiempoalertas" type="number" value="{{data.tiempoalertas}}">
+                        </div>
+                            <input id="id_proyecto" name="id_proyecto" type="hidden" value="{{data.id_proyecto}}">
+
+
+
+
+                    </div>
+
+                    <div class="d-flex justify-content-center ">
+                        <a>
+                            <button class="btn btn-primary" type="submit" value="Ingresar"
+                                id="ingresar">Guardar</button>
+                        </a>
+                    </div>
 
 
                 </form>
 
-
-                <div class="">
-                    <a href="" id="rc">Recuperar contraseña</a>
-                </div>
 
             </div>
         </div>

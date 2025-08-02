@@ -31,7 +31,7 @@ const Proyecto = sequelize.define(
         required: true,
       },
     telefono: {
-        type: DataTypes.INTEGER(10),
+        type: DataTypes.INTEGER(15),
         allowNull: false,
         required: true,
       },

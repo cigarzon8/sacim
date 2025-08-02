@@ -46,13 +46,22 @@
 </div>
 
 
-
-
-
 {{#if meesaje}}
-    <div class="alert alert-{{meesaje.estado}}" role="alert">
-    {{meesaje.text}}
+
+<section class="contact_section layout_padding">
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-md-2"></div> <!-- espacio izquierdo -->
+      <div class="col-md-8">
+        <div class="alert alert-{{meesaje.estado}}" role="alert">
+          {{meesaje.text}}
+        </div>
+      </div>
+      <div class="col-md-2"></div> <!-- espacio derecho -->
     </div>
+  </div>
+</section>
+
 {{/if}}
 
 

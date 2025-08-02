@@ -9,7 +9,13 @@
             Proyectos
         </h3>
     </div>
-<a href="/proyecto/add"><td><button class="btn btn-primary">Agregar</button></td></a>
+    
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/proyecto/add">
+            Agregar <i class="fa-solid fa-plus ms-2"></i>
+        </a>
+    </div>
+
     <div class="container layout_padding2-top">
         <div class="row">
             <div class="col-md-6 mx-auto">
@@ -33,9 +39,6 @@
                           <td>{{this.createdAt}}</td>
                           <td>{{this.telefono}}</td>
                           <td>
-                            <a href="/proyecto/remove/{{this.id}}">
-                              <button class="btn btn-danger">Eliminar</button>
-                            </a>
                             <a href="/proyecto/editar/{{this.id_proyecto}}">
                               <button class="btn btn-success">Editar</button>
                             </a>
