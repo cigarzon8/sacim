@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../db.js');
 
-const Pagoproyecto = sequelize.define(
-  'Pagoproyecto',
+const Proyectopago = sequelize.define(
+  'Proyectopago',
   {
     id_pago_proyecto: {
       type: DataTypes.INTEGER,
@@ -45,4 +45,4 @@ const Pagoproyecto = sequelize.define(
 );
 
 
-module.exports = Pagoproyecto;
+module.exports = Proyectopago;

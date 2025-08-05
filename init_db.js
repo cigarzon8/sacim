@@ -3,7 +3,7 @@ const { sequelize } = require('./db');
 
 const Estado = require('./model/Estado');
 const Proyecto = require('./model/Proyecto')
-const Pagoproyecto = require('./model/Pagoproyecto')
+const Proyectopago = require('./model/Proyectopago')
 const Rol = require('./model/Rol')
 const Usuario = require('./model/Usuario');
 const Vehiculo = require('./model/Vehiculo');
@@ -82,17 +82,18 @@ async function initializeDatabase() {
         }
 
 
-        //Pagoproyecto
+        //Proyectopago
         const date = new Date()
         //preguntar por que la fecha no se guarda de hoy
-        await Pagoproyecto.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Pagoproyecto.sync({ force: true });
-        const  ExistProyectoPago =  await Pagoproyecto.findOne({limit:1});
+        await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
+        await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'PagoEstado' });
+        await Proyectopago.sync({ force: true });
+        const  ExistProyectoPago =  await Proyectopago.findOne({limit:1});
         if (!ExistProyectoPago){
 
-            await Pagoproyecto.create({
+            await Proyectopago.create({
                 estado: 1,
-                pagoestado:1,
+                pagoestado:6,
                 id_proyecto:1,
                 fecha_fin_licencia:date,
                 fecha_inici_licencia:date

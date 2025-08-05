@@ -73,11 +73,6 @@ router.post('/add',auth, async function(req, res) {
   }
 });
 
-router.get('/remove/:id',auth, async function(req, res) {
-  const users = await byid(req.params.id);
-  await users.destroy()
-  res.redirect('/proyecto');
-});
 
 router.get('/editar/:id',auth, async function(req, res) {
   const proyecto = await byid(req?.params?.id);

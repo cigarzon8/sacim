@@ -1,0 +1,82 @@
+{{> layout}}
+{{> nav}}
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Pago de Proyectos {{this.nombre_proyecto}}
+        </h3>
+    </div>
+    <br>
+
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/proyectopago">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
+    </div>
+
+
+
+
+<div class="container">
+    <div class="table-responsive">
+                    {{#each data}}
+
+
+
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Campo</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>ID Pago Proyecto</th>
+            <td>{{this.id_pago_proyecto}}</td>
+          </tr>
+          <tr>
+            <th>ID Proyecto</th>
+            <td>{{this.id_proyecto}}</td>
+          </tr>
+          <tr>
+            <th>Estado</th>
+            <td>{{this.estado}}</td>
+          </tr>
+          <tr>
+            <th>Estado del Pago</th>
+            <td>{{this.pagoestado}}</td>
+          </tr>
+          <tr>
+            <th>Valor</th>
+            <td>${{this.valor}}</td>
+          </tr>
+          <tr>
+            <th>Fecha Inicio Licencia</th>
+            <td>{{this.fecha_inici_licencia}}</td>
+          </tr>
+          <tr>
+            <th>Fecha Fin Licencia</th>
+            <td>{{this.fecha_fin_licencia}}</td>
+          </tr>
+          <tr>
+            <th>Creado</th>
+            <td>{{this.createdAt}}</td>
+          </tr>
+          <tr>
+            <th>Actualizado</th>
+            <td>{{this.updatedAt}}</td>
+          </tr>
+        </tbody>
+      </table>
+                    {{/each}}
+    </div>
+  </div>
+
+
+</section>
+
+
+{{> footer}}

@@ -1,0 +1,116 @@
+{{> layout}}
+{{> nav}}
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Pago de Proyectos {{data.nombre_proyecto}}
+        </h3>
+    </div>
+    <br>
+
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/proyectopago">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
+    </div>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
+
+
+                <form action="/proyectopago/add" method="post" class="needs-validation">
+
+                    <div class="form-group">
+
+                        <!--Nombre-->
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                name="valor" 
+                                id="valor" 
+                                placeholder="valor"
+                                autocomplete="off" 
+                                min="1" 
+                                value="{{data.valor}}"
+                                required>
+
+                            <div class="invalid-feedback">
+                                Asigne un valor diferente a 0.
+                            </div>
+                        </div>
+
+
+                    <div>
+                        <select name="pagoestado" id="pagoestado">
+                        <option value="" disabled selected>Estado del pago</option>
+                        {{#each pagoestadoList}}
+                            <option value="{{this.id_estado}}">{{this.nombre_estado}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+
+
+
+
+
+                        <div class="form-group">
+                            <input 
+                                placeholder="Fecha Inici Licencia" 
+                                id="fecha_inici_licencia" 
+                                name="fecha_inici_licencia" 
+                                type="date" 
+                                class="form-control correo" 
+                                value="{{#if data.fecha_inici_licencia}}{{data.fecha_inici_licencia}}{{else}}{{hoy}}{{/if}}" 
+                                required>
+
+                            <div class="invalid-feedback">
+                                Asigne una fecha.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input 
+                                placeholder="Fecha Inici Licencia" 
+                                id="fecha_fin_licencia" 
+                                name="fecha_fin_licencia" 
+                                type="date" 
+                                class="form-control correo" 
+                                value="{{#if data.fecha_fin_licencia}}{{data.fecha_fin_licencia}}{{else}}{{hoy}}{{/if}}" 
+                                required>
+
+                            <div class="invalid-feedback">
+                                Asigne una fecha.
+                            </div>
+                        </div>
+                    <input id="id_pago_proyecto" name="id_pago_proyecto" type="hidden" value="{{data.id_pago_proyecto}}">
+
+
+
+
+                    </div>
+
+                    <div class="d-flex justify-content-center ">
+                        <a>
+                            <button class="btn btn-primary" type="submit" value="Ingresar"
+                                id="ingresar">Guardar</button>
+                        </a>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{{> footer}}

@@ -10,16 +10,23 @@ const port = 3000;
 
 
 //controller
+const estados = require('./controler/Estados')
+const proyecto = require('./controler/Proyecto')
+const Proyectopago = require('./controler/Proyectopago')
+
+
+
 const userroute = require('./controler/user');
 const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
 const cobrosroute = require('./controler/cobros')
-const proyecto = require('./controler/Proyecto')
+
 const movimientos = require('./controler/Movimientos')
 const pagos = require('./controler/Pagos')
 const valores = require('./controler/Valores')
 const api = require('./appi/routes')
-const estados = require('./controler/Estados')
+
+
 /**DB */
 const sequelize = require('./db');
 
@@ -55,6 +62,8 @@ app.get('/', (req, res) => {
 
 app.use('/estados', estados);
 app.use('/proyecto',proyecto)
+app.use('/proyectopago',Proyectopago)
+
 
 app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)

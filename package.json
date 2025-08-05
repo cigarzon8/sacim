@@ -4,7 +4,8 @@
   "description": "parkingapp",
   "main": "app.js",
   "scripts": {
-    "local": "nodemon app.js"
+    "local": "nodemon app.js",
+    "test":"jest"
   },
   "author": "Cesar Garzon",
   "license": "ISC",
@@ -20,5 +21,9 @@
     "pbkdf2-password": "^1.2.1",
     "sequelize": "^6.37.3",
     "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
   }
 }
