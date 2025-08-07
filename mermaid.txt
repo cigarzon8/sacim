@@ -1,0 +1,192 @@
+erDiagram
+
+  Estado {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+  Proyecto {
+    INT id_proyecto PK "NOT NULL"
+    VARCHAR(100) nombre_proyecto "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT tiempogratuito "NOT NULL"
+    INT tiempoalertas "NOT NULL"
+    VARCHAR(100) correo "NOT NULL"
+    BIGINT telefono "NOT NULL"
+  }
+
+  Pagoproyecto {
+    INT id_pago_proyecto PK "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT pagoestado "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+    FLOAT valor "NOT NULL"
+    DATE fecha_fin_licencia "NOT NULL"
+    DATE fecha_inici_licencia "NOT NULL"
+  }
+
+  Rol {
+    INT id_rol PK "NOT NULL"
+    VARCHAR(100) nombre "NOT NULL"
+    INT estado FK "NOT NULL"
+  }
+
+  Usuario {
+    INT id_usuario PK "NOT NULL"
+    VARCHAR(100) nombres "NOT NULL"
+    VARCHAR(100) apellidos "NOT NULL"
+    VARCHAR(100) correo "NOT NULL"
+    VARCHAR(20) documento "NOT NULL"
+    VARCHAR(255) password "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT tipo_documento FK "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+    INT id_rol FK "NOT NULL"
+  }
+
+  Vehiculo {
+    INT id_vehiculo PK "NOT NULL"
+    VARCHAR(10) placa "NOT NULL"
+    VARCHAR(50) parqueadero_asignado "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT tipovehiculo FK "NOT NULL"
+    INT tipofacturacion FK "NOT NULL"
+    INT tipousuario FK "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+  }
+
+  Valores {
+    INT id_valores PK "NOT NULL"
+    FLOAT valor "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT tipovehiculo FK "NOT NULL"
+    INT tipofacturacion FK "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+  }
+
+  Movimiento {
+    INT id_movimiento PK "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT id_vehiculo FK "NOT NULL"
+    INT tipo_movimiento FK "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+  }
+
+  Parqueadero {
+    INT id_parqueadero PK "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT tipovehiculo FK "NOT NULL"
+    INT tipoveparqueadero FK "NOT NULL"
+    INT tipousuario FK "NOT NULL"
+    INT capacidad "NOT NULL"
+    INT ocupacion "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+  }
+
+  Pago {
+    INT id_pago PK "NOT NULL"
+    INT id_vehiculo FK "NOT NULL"
+    INT estado FK "NOT NULL"
+    INT id_movimiento_ingreso FK "NOT NULL"
+    INT id_movimiento_salida FK "NOT NULL"
+    INT estado_pago FK "NOT NULL"
+    INT tiporenta FK "NOT NULL"
+    INT id_usuario FK "NOT NULL"
+    INT id_proyecto FK "NOT NULL"
+    FLOAT valor "NOT NULL"
+    INT duracion_parqueo "NOT NULL"
+  }
+
+
+
+
+ Tipos_pagos {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+ Tipos_documentos {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+ Tipos_vehiculo {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+ Tipos_movimiento {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }  
+ Tipos_facturacion {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+ Tipos_usuario {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+ Tipos_parqueadero {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+ Tipos_renta {
+    INT id_estado PK "NOT NULL"
+    VARCHAR(100) nombre_estado "NOT NULL"
+  }
+
+    %% Relaciones visuales
+
+    Estado ||--o{ Proyecto : estado
+    Estado ||--o{ Pagoproyecto : estado
+    Estado ||--o{ Rol : estado
+    Estado ||--o{ Usuario : estado
+    Estado ||--o{ Vehiculo : estado
+    Estado ||--o{ Valores : estado
+    Estado ||--o{ Movimiento : estado
+    Estado ||--o{ Parqueadero : estado
+    Estado ||--o{ Pago : estado
+    Tipos_documentos ||--o{ Usuario : tipo_documento
+    Tipos_vehiculo ||--o{ Vehiculo : tipovehiculo
+    Tipos_vehiculo ||--o{ Valores : tipovehiculo
+    Tipos_vehiculo ||--o{ Parqueadero : tipovehiculo
+
+
+
+    Tipos_usuario ||--o{ Vehiculo : tipousuario
+    Tipos_usuario ||--o{ Parqueadero : tipousuario
+
+
+    Tipos_facturacion ||--o{ Vehiculo : tipofacturacion
+    Tipos_facturacion ||--o{ Valores : tipofacturacion
+
+
+    Tipos_movimiento ||--o{ Movimiento : tipo_movimiento
+
+    Tipos_parqueadero ||--o{ Parqueadero : tipoveparqueadero
+
+    Tipos_pagos ||--o{ Pago : estado_pago
+
+    Tipos_renta ||--o{ Pago : tiporenta
+
+    Proyecto ||--o{ Usuario : id_proyecto
+    Proyecto ||--o{ Vehiculo : id_proyecto
+    Proyecto ||--o{ Valores : id_proyecto
+    Proyecto ||--o{ Movimiento : id_proyecto
+    Proyecto ||--o{ Parqueadero : id_proyecto
+    Proyecto ||--o{ Pagoproyecto : id_proyecto
+    Proyecto ||--o{ Pago : id_proyecto
+
+    Rol ||--o{ Usuario : id_rol
+
+    Vehiculo ||--o{ Movimiento : id_vehiculo
+    Vehiculo ||--o{ Pago : id_vehiculo
+
+    Usuario ||--o{ Pago : id_usuario
+
+    Movimiento ||--o{ Pago : id_movimiento_ngreso
+    Movimiento ||--o{ Pago : id_movimiento_salida
+
+

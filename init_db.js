@@ -12,55 +12,116 @@ const Movimiento = require('./model/Movimientos')
 const Parqueadero = require('./model/Parqueadero');
 const Pago = require('./model/Pago')
 
+const TipoPagos = require('./model/Tipos_pagos')
+const TipoDocumentos = require('./model/Tipos_documentos')
+const TipousUsuario = require('./model/Tipos_usuario')
+const TipoMovimiento = require('./model/Tipos_movimiento')
+const TipoFacturacion = require('./model/Tipos_facturacion')
+const TipoParqueadero = require('./model/Tipos_parqueadero')
+const TipoRenta = require('./model/Tipos_renta')
+const TipousVehiculo = require('./model/Tipos_vehiculo')
+
 async function initializeDatabase() {
 
     const synct = true;
     if (synct){
         //Estado
 
+
+        //await Estado.sync({ force: true });
         const ExistEstado =  await Estado.findOne({limit:1});
         if (!ExistEstado){
-        await Estado.sync({ force: true });
+
             await Estado.bulkCreate([
 
-                { id_estado: 1, nombre_estado: 'Activo', categoria: 'General', id_categoria:1 },
-                { id_estado: 2, nombre_estado: 'Bloqueado', categoria: 'General', id_categoria:1  },
-                { id_estado: 3, nombre_estado: 'Inactivo', categoria: 'General', id_categoria:1  },
-                { id_estado: 4, nombre_estado: 'Nuevo', categoria: 'General', id_categoria:1  },
+                    { id_estado: 1, nombre_estado: 'Activo' },
+                    { id_estado: 2, nombre_estado: 'Bloqueado'},
+                    { id_estado: 3, nombre_estado: 'Inactivo'},
+                    { id_estado: 4, nombre_estado: 'Nuevo'},
 
-                { id_estado: 5, nombre_estado: 'Anulado', categoria: 'Pagos', id_categoria:2 },
-                { id_estado: 6, nombre_estado: 'Cobrado', categoria: 'Pagos', id_categoria:2  },
-                { id_estado: 7, nombre_estado: 'Pagado', categoria: 'Pagos', id_categoria:2  },
+            ]);
 
+        }
 
+        
+        await TipoPagos.sync({ force: true });
+        const ExistTipoPagos =  await TipoPagos.findOne({limit:1});
+        if (!ExistTipoPagos){
 
-
-                { id_estado: 8, nombre_estado: 'Cedula', categoria: 'documentos', id_categoria:3  },
-                { id_estado: 9, nombre_estado: 'Cedula Extranjeria', categoria: 'documentos', id_categoria:3  },
-                { id_estado: 10, nombre_estado: 'Pasaporte', categoria: 'documentos', id_categoria:3  },
-                { id_estado: 11, nombre_estado: 'Registro Civil', categoria: 'documentos', id_categoria:4  },
-                { id_estado: 12, nombre_estado: 'Tarjeta identidad', categoria: 'documentos', id_categoria:4  },
-
-
-
-
-                { id_estado: 13, nombre_estado: 'Bicicleta', categoria: 'vehiculo', id_categoria:5  },
-                { id_estado: 14, nombre_estado: 'Carro', categoria: 'vehiculo', id_categoria:5  },
-                { id_estado: 15, nombre_estado: 'Moto', categoria: 'vehiculo', id_categoria:5  },
+            await TipoPagos.bulkCreate([
+    
+                { id_tipo_pagos: 1, nombre_estado: 'Anulado'},
+                { id_tipo_pagos: 2, nombre_estado: 'Cobrado' },
+                { id_tipo_pagos: 3, nombre_estado: 'Pagado' },
+    
+            ]);
+        }
 
 
-                { id_estado: 16, nombre_estado: 'Ingreso', categoria: 'movimiento', id_categoria:6  },
-                { id_estado: 17, nombre_estado: 'Salida', categoria: 'movimiento', id_categoria:6 },
+        await TipoDocumentos.sync({ force: true });
+        const ExistTipoDocumentos =  await TipoDocumentos.findOne({limit:1});
+        if (!ExistTipoDocumentos){
 
-                { id_estado: 18, nombre_estado: 'Minuto', categoria: 'facturacion', id_categoria:7  },
-                { id_estado: 19, nombre_estado: 'Hora', categoria: 'facturacion', id_categoria:7  },
-                { id_estado: 20, nombre_estado: 'Dia', categoria: 'facturacion', id_categoria:7  },
-                { id_estado: 21, nombre_estado: 'Semana', categoria: 'facturacion', id_categoria:7  },
-                { id_estado: 22, nombre_estado: 'Mes', categoria: 'facturacion', id_categoria:7  },
-                { id_estado: 23, nombre_estado: 'Año', categoria: 'facturacion', id_categoria:7  },
+            await TipoDocumentos.bulkCreate([
+                { id_tipo_documento: 1, nombre_estado: 'Cedula'},
+                { id_tipo_documento: 2, nombre_estado: 'Cedula Extranjeria'},
+                { id_tipo_documento: 3, nombre_estado: 'Pasaporte'},
+                { id_tipo_documento: 4, nombre_estado: 'Registro Civil'},
+                { id_tipo_documento: 5, nombre_estado: 'Tarjeta identidad'},
+            ]);
+        }
 
-                { id_estado: 24, nombre_estado: 'Propietario', categoria: 'Tipousuario', id_categoria:8  },
-                { id_estado: 25, nombre_estado: 'Visitante', categoria: 'Tipousuario', id_categoria:8  },
+        await TipousUsuario.sync({ force: true });
+        const ExistTipousUsuario =  await TipousUsuario.findOne({limit:1});
+        if (!ExistTipousUsuario){
+            await TipousUsuario.bulkCreate([
+                { id_tipo_usuario: 1, nombre_estado: 'Propietario'},
+                { id_tipo_usuario: 2, nombre_estado: 'Visitante'},
+            ]);
+        }
+        await TipoMovimiento.sync({ force: true });
+        const ExistTipoMovimiento =  await TipoMovimiento.findOne({limit:1});
+        if (!ExistTipoMovimiento){
+            await TipoMovimiento.bulkCreate([
+                { id_tipo_movimiento: 1, nombre_estado: 'Ingreso'},
+                { id_tipo_movimiento: 2, nombre_estado: 'Salida'},
+            ]);
+        }
+
+
+        await TipoFacturacion.sync({ force: true });
+        const ExistTipoFacturacion =  await TipoFacturacion.findOne({limit:1});
+        if (!ExistTipoFacturacion){
+            await TipoFacturacion.bulkCreate([
+                { id_tipo_facturacion: 1, nombre_estado: 'Minuto'},
+                { id_tipo_facturacion: 2, nombre_estado: 'Hora'},
+                { id_tipo_facturacion: 3, nombre_estado: 'Dia'},
+                { id_tipo_facturacion: 4, nombre_estado: 'Semana'},
+                { id_tipo_facturacion: 5, nombre_estado: 'Mes'},
+                { id_tipo_facturacion: 6, nombre_estado: 'Año'},
+
+            ]);
+        }
+
+        await TipoParqueadero.sync({ force: true });
+        const ExistTipoParqueadero =  await TipoParqueadero.findOne({limit:1});
+        if (!ExistTipoParqueadero){
+            await TipoParqueadero.bulkCreate([
+
+                { id_tipo_parqueadero: 1, nombre_estado: 'Propietario'},
+                { id_tipo_parqueadero: 2, nombre_estado: 'Visitante'},
+
+            ]);
+        }
+
+        await TipousVehiculo.sync({ force: true });
+        const ExistTipousVehiculo =  await TipousVehiculo.findOne({limit:1});
+        if (!ExistTipousVehiculo){
+            await TipousVehiculo.bulkCreate([
+
+                { id_tipo_vehiculo: 13, nombre_estado: 'Bicicleta'},
+                { id_tipo_vehiculo: 14, nombre_estado: 'Carro'},
+                { id_tipo_vehiculo: 15, nombre_estado: 'Motocileta'},
 
             ]);
         }
@@ -86,7 +147,7 @@ async function initializeDatabase() {
         const date = new Date()
         //preguntar por que la fecha no se guarda de hoy
         await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'PagoEstado' });
+        await Proyectopago.belongsTo(TipoPagos, { foreignKey: 'estado', as: 'PagoEstado' });
         await Proyectopago.sync({ force: true });
         const  ExistProyectoPago =  await Proyectopago.findOne({limit:1});
         if (!ExistProyectoPago){
@@ -119,7 +180,7 @@ async function initializeDatabase() {
 
         await Usuario.sync({ force: true });
         await Usuario.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Usuario.belongsTo(Estado, { foreignKey: 'tipo_documento', as: 'TipoDocumento' });
+        await Usuario.belongsTo(TipoDocumentos, { foreignKey: 'tipo_documento', as: 'TipoDocumento' });
         await Usuario.belongsTo(Rol, { foreignKey: 'id_rol', as: 'rol' });
         const  ExistUsuario =  await Usuario.findOne({limit:1});
         if (!ExistUsuario){
@@ -132,8 +193,8 @@ async function initializeDatabase() {
 
         await Vehiculo.sync({ force: true });
         await Vehiculo.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Vehiculo.belongsTo(Estado, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });
-        await Vehiculo.belongsTo(Estado, { foreignKey: 'tipofacturacion', as: 'TipoFacturacion' });   
+        await Vehiculo.belongsTo(TipousVehiculo, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });
+        await Vehiculo.belongsTo(TipoFacturacion, { foreignKey: 'tipofacturacion', as: 'TipoFacturacion' });   
         await Vehiculo.belongsTo(Estado, { foreignKey: 'tipousuario', as: 'TipoUsuario' });           
         
         const  ExistVehiculo =  await Vehiculo.findOne({limit:1});
@@ -149,8 +210,8 @@ async function initializeDatabase() {
 
         await Valores.sync({ force: true });
         await Valores.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Valores.belongsTo(Estado, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });
-        await Valores.belongsTo(Estado, { foreignKey: 'tipofacturacion', as: 'TipoFacturacion' });        
+        await Valores.belongsTo(TipousVehiculo, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });
+        await Valores.belongsTo(TipoFacturacion, { foreignKey: 'tipofacturacion', as: 'TipoFacturacion' });        
         const  ExistValores =  await Valores.findOne({limit:1});
         if (!ExistValores){
             await Valores.bulkCreate([
@@ -169,7 +230,7 @@ async function initializeDatabase() {
         await Movimiento.sync({ force: true });
         await Movimiento.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
         await Movimiento.belongsTo(Vehiculo, { foreignKey: 'id_vehiculo', as: 'IdVehiculo' });
-        await Movimiento.belongsTo(Estado, { foreignKey: 'tipo_movimiento', as: 'TipoMovimiento' });        
+        await Movimiento.belongsTo(TipoMovimiento, { foreignKey: 'tipo_movimiento', as: 'TipoMovimiento' });        
         const  ExistMovimiento =  await Movimiento.findOne({limit:1});
         if (!ExistMovimiento){
             await Movimiento.bulkCreate([
@@ -182,9 +243,9 @@ async function initializeDatabase() {
 
         await Parqueadero.sync({ force: true });
         await Parqueadero.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Parqueadero.belongsTo(Estado, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });        
-        await Parqueadero.belongsTo(Estado, { foreignKey: 'tipoveparqueadero', as: 'TipoveParqueadero' });
-        await Parqueadero.belongsTo(Estado, { foreignKey: 'tipousuario', as: 'TipoUsuario' });          
+        await Parqueadero.belongsTo(TipousVehiculo, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });        
+        await Parqueadero.belongsTo(TipoParqueadero, { foreignKey: 'tipoveparqueadero', as: 'TipoveParqueadero' });
+        await Parqueadero.belongsTo(TipousUsuario, { foreignKey: 'tipousuario', as: 'TipoUsuario' });          
         
 
         const  ExistParqueadero =  await Parqueadero.findOne({limit:1});
