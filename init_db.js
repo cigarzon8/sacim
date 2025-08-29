@@ -5,7 +5,7 @@ const Estado = require('./model/Estado');
 const Proyecto = require('./model/Proyecto')
 const Proyectopago = require('./model/Proyectopago')
 const Rol = require('./model/Rol')
-const Usuario = require('./model/Usuario');
+const Usuario = require('./model/Usuario')//
 const Vehiculo = require('./model/Vehiculo');
 const Valores = require('./model/Valores')
 const Movimiento = require('./model/Movimientos')
@@ -44,7 +44,7 @@ async function initializeDatabase() {
         }
 
         
-        await TipoPagos.sync({ force: true });
+        //await TipoPagos.sync({ force: true });
         const ExistTipoPagos =  await TipoPagos.findOne({limit:1});
         if (!ExistTipoPagos){
 
@@ -147,14 +147,14 @@ async function initializeDatabase() {
         const date = new Date()
         //preguntar por que la fecha no se guarda de hoy
         await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Proyectopago.belongsTo(TipoPagos, { foreignKey: 'estado', as: 'PagoEstado' });
+        await Proyectopago.belongsTo(TipoPagos, { foreignKey: 'pagoestado', as: 'PagoEstado' });
         await Proyectopago.sync({ force: true });
         const  ExistProyectoPago =  await Proyectopago.findOne({limit:1});
         if (!ExistProyectoPago){
 
             await Proyectopago.create({
                 estado: 1,
-                pagoestado:6,
+                pagoestado:1,
                 id_proyecto:1,
                 fecha_fin_licencia:date,
                 fecha_inici_licencia:date
@@ -185,7 +185,7 @@ async function initializeDatabase() {
         const  ExistUsuario =  await Usuario.findOne({limit:1});
         if (!ExistUsuario){
             await Usuario.bulkCreate([
-                {id_usuario:1, nombres:"admin1", apellidos:"admin1", correo:"admin1@admin1.com", documento:"11111",password:"admin1",estado: 1,tipo_documento:8,id_proyecto:1,id_rol:3}
+                {id_usuario:1, nombres:"admin1", apellidos:"admin1", correo:"admin1@admin1.com", documento:"11111",password:"admin1",estado: 1,tipo_documento:1,id_proyecto:1,id_rol:3}
             ]);
         } 
 

@@ -3,20 +3,24 @@ var express = require('express');
 var router = express.Router();
 const User = require('../model/Usuario');
 const Estado = require('../model/Estado')
+const TipoDocumentos = require('../model/Tipos_documentos')
 const auth = require('../midleware/auth')
+const procesoArray = require('../utils/procesoArray')
 
 router.get('/', auth,async function(req, res) {
   const users = await User.findAll({
     include: {
       model: Estado,
-      attributes: ['NombreEstado'],
-    },
+      as: 'EstadoRelacion',
+      attributes: ['nombre_estado'],
+    }
   });
 
   const usersData = users.map(
     user => {
       const userJson = user.toJSON();
-      userJson.estado = user.Estado.NombreEstado;
+      console.log('user.Estado',userJson)
+      userJson.estado = user.EstadoRelacion.nombre_estado;
       return userJson;
     }
     );
@@ -47,18 +51,23 @@ router.get('/logout',auth, async function(req, res) {
 });
 
 router.get('/add',auth, async function(req, res) {
-  res.render('user/add',{data:{},meesaje:{}});
+  const tiposDocumentos1 = await TipoDocumentos.findAll()
+  const tiposDocumentos = await  procesoArray(tiposDocumentos1)
+  res.render('user/add',{data:{},tiposDocumentos,meesaje:{}});
 });
 
 router.get('/myprofile/:id',auth, async function(req, res) {
 
-  let userid = req.session.user.userid
+  let id_usuario = req?.session?.user?.id_usuario
   if(req.params.id && req.params.id != 0){
-    userid = req.params.id
+    id_usuario = req.params.id
   }
-    let user = await byid(userid)
+    let user = await byid(id_usuario)
+    if (!user) return  res.redirect('/user');
     user = user.toJSON()
-    res.render('user/add',{data:user,meesaje:{}});
+ const tiposDocumentos1 = await TipoDocumentos.findAll()
+  const tiposDocumentos = await  procesoArray(tiposDocumentos1)
+    res.render('user/add',{data:user,tiposDocumentos,meesaje:{}});
 });
 
 
@@ -68,8 +77,10 @@ router.post('/myprofile',auth, async function(req, res) {
     estado:'success',
     text:'Usuario Creador correctamente'
   }
+ const tiposDocumentos1 = await TipoDocumentos.findAll()
+  const tiposDocumentos = await  procesoArray(tiposDocumentos1)
   try {
-  const user = await User.findOne({id:req.body.userid});
+  const user = await User.findOne({id:req.body.id_usuario});
 
   user.set({
     nombres: req.body.nombres,
@@ -81,20 +92,23 @@ router.post('/myprofile',auth, async function(req, res) {
   meesaje.text = 'Usuario Actualizado correctamente'
   user.save();
 
-  res.render('user/add',{data:user.toJSON(),meesaje:meesaje});
+  res.render('user/add',{data:user.toJSON(),tiposDocumentos,meesaje:meesaje});
 
   } catch (error) {
     console.log('error',error)
     meesaje.estado = 'danger',
     meesaje.text = 'Correo o documento duplicado'
-    res.render('user/add',{data:req.body,meesaje:meesaje});
+    res.render('user/add',{data:req.body,tiposDocumentos,meesaje:meesaje});
   }
 });
 
 
 router.post('/add',auth, async function(req, res) {
-  console.log('add')
+  req.body.id_proyecto = 1 
   req.body.estado = 1
+  req.body.id_rol = 2
+   const tiposDocumentos1 = await TipoDocumentos.findAll()
+  const tiposDocumentos = await  procesoArray(tiposDocumentos1)
   let meesaje = {
     estado:'success',
     text:'Usuario Creador correctamente'
@@ -105,15 +119,15 @@ router.post('/add',auth, async function(req, res) {
     if (req.body[key] === null) {
       meesaje.estado = 'danger',
       meesaje.text = 'Diligencie todos los campos'
-      return res.render('user/add',{data:req.body,meesaje:meesaje});
+      return res.render('user/add',{data:req.body,tiposDocumentos,meesaje:meesaje});
     }
   }
-  req.body.proyecto = req.session.user.proyecto
+  req.body.proyecto = req?.session?.user?.proyecto || 1
   const user = new User(req.body);
 
   try {
     await user.save();
-    return res.render('user/add',{data:{},meesaje:meesaje});
+    return res.render('user/add',{data:{},tiposDocumentos,meesaje:meesaje});
   } catch (error) {
     console.log('error',error)
     meesaje.estado = 'danger',
@@ -138,10 +152,10 @@ async function authenticate(name, pass, fn) {
   });
 }
 
-async function byid(id, fn) {
+async function byid(id_usuario, fn) {
   return await User.findOne({
     where: {
-      userid: id
+      id_usuario
     },
     limit:1
   });

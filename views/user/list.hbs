@@ -1,43 +1,71 @@
 {{> layout}}
 {{> header}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/user/add"><td><button class="btn btn-primary">Agregar</button></td></a>
+<!-- contact section -->
 
-<table class="table">
-  <thead>
-    <tr>
-    {{#each headerlist}}
-        <th scope="row">{{this}}</th>
-    {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#each datalist}}
-        <tr>
-        <td>{{this.userid}}</td>
-        <td>{{this.estado}}</td>
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Usuarios
+        </h3>
+    </div>
+    
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/user/add">
+            Agregar <i class="fa-solid fa-plus ms-2"></i>
+        </a>
+    </div>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
 
 
-        <td>{{this.nombres}}</td>
-        <td>{{this.apellidos}}</td>
-        <td>{{this.correo}}</td>
-        <td>{{this.documento}}</td>
-        <td>
-          <a href="/user/remove/{{this.userid}}">
-            <button class="btn btn-danger">Delete</button>
-          </a>
-          
-          <a href="/user/myprofile/{{this.userid}}">
-            <button class="btn btn-success">Edit</button>
-          </a>
-        </td>
-        </tr>
-    {{/each}}
+                <table class="table">
+                <thead>
+                    <tr>
+                    {{#each headerlist}}
+                        <th scope="row">{{this}}</th>
+                    {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each datalist}}
+                      <tr>
+                      <td>{{this.userid}}</td>
+                      <td>{{this.estado}}</td>
 
-  </tbody>
-</table>
 
-</div>
+                      <td>{{this.nombres}}</td>
+                      <td>{{this.apellidos}}</td>
+                      <td>{{this.correo}}</td>
+                      <td>{{this.documento}}</td>
+                      <td>
+                        <!--a href="/user/remove/{{this.userid}}">
+                          <button class="btn btn-danger">Delete</button>
+                        </a-->
+                        
+                        <a href="/user/myprofile/{{this.id_usuario}}">
+                          <button class="btn btn-success">Edit</button>
+                        </a>
+                      </td>
+                      </tr>
+                    {{/each}}
+
+                </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+
 
 {{> footer}}
+
+

@@ -1,19 +1,33 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/user">List</a>
+<!-- contact section -->
 
-{{#if data.userid}}
-  <form  id="useradd" action="/user/myprofile" method="post" class="needs-validation was-validated" novalidate>
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Pago de Proyectos {{data.nombre_proyecto}}
+        </h3>
+    </div>
+    <br>
+
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/user">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
+    </div>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
+
+{{#if data.id_usuario}}
+  <form  id="useradd" action="/user/myprofile" method="post" class="needs-validation" novalidate>
 {{else}}
-  <form  id="useradd" action="/user/add" method="post" class="needs-validation was-validated" novalidate>
+  <form  id="useradd" action="/user/add" method="post" class="needs-validation" novalidate>
 {{/if}}
-
-
-
   <div class="form-group">
-    <label for="nombres">Nombres</label>
-    <input type="text" class="form-control" name="nombres" id="nombres" placeholder="pedro pepito" autocomplete="off" required value="{{data.nombres}}">
+    <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres" autocomplete="off" required value="{{data.nombres}}">
     <div class="valid-feedback">
       ok!
     </div>
@@ -23,8 +37,7 @@
   </div>
 
   <div class="form-group">
-    <label for="apellidos">Apellidos</label>
-    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="perez pascal" autocomplete="off" required  value="{{data.apellidos}}">
+    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos" autocomplete="off" required  value="{{data.apellidos}}">
     <div class="valid-feedback">
       ok!
     </div>
@@ -34,8 +47,7 @@
   </div>
 
   <div class="form-group">
-    <label for="correo">Correo</label>
-    <input type="email" class="form-control" name="correo" id="correo" placeholder="name@example.com" autocomplete="off" required value="{{data.correo}}">
+    <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo" autocomplete="off" required value="{{data.correo}}">
     <div class="valid-feedback">
       ok!
     </div>
@@ -44,9 +56,20 @@
     </div>
   </div>
 
+
+  <div>
+      <select name="tipo_documento" id="tipo_documento">
+      <option value="" disabled selected>Tipo de documento</option>
+      {{#each tiposDocumentos}}
+          <option value="{{this.id_tipo_documento}}">{{this.nombre_estado}}</option>
+      {{/each}}
+      </select>
+  </div>
+
+
+
   <div class="form-group">
-    <label for="documento">Documento</label>
-    <input type="number" class="form-control" name="documento" id="documento" placeholder="123456789" autocomplete="off" required value="{{data.documento}}">
+    <input type="number" class="form-control" name="documento" id="documento" placeholder="Documento" autocomplete="off" required value="{{data.documento}}">
     <div class="valid-feedback">
       ok!
     </div>
@@ -56,8 +79,7 @@
   </div>
 
   <div class="form-group">
-    <label for="password">Contraseña</label>
-    <input type="password" class="form-control" name="password" id="password" placeholder="password" autocomplete="off" required value="{{data.password}}">
+    <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" autocomplete="off" required value="{{data.password}}">
     <div class="valid-feedback">
       ok!
     </div>
@@ -82,8 +104,14 @@
     </diV>
 {{/if}}
 
-</form>
 
-</div>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
 
 {{> footer}}
