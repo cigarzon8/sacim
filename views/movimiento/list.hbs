@@ -1,8 +1,20 @@
 {{> layout}}
 {{> header}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/movimientos/add"><td><button class="btn btn-primary">Agregar</button></td></a>
+
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Movimientos
+        </h3>
+    </div>
+    
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
 
 <table class="table">
   <thead>
@@ -15,7 +27,7 @@
   <tbody>
     {{#each datalist}}
         <tr>
-        <td>{{this.id}}</td>
+        <td>{{this.id_movimiento}}</td>
         <td>{{this.placa}}</td>
         <td>{{this.estado}}</td>
         <td>{{this.createdAt}}</td>
@@ -25,6 +37,13 @@
   </tbody>
 </table>
 
-</div>
 
+
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
 {{> footer}}

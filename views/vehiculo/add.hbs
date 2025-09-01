@@ -1,49 +1,72 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/vehiculo">List</a>
+
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Vehiculo {{data.placa}}
+        </h3>
+    </div>
+    <br>
+
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/vehiculo">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
+    </div>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
 
 <form  id="useradd" action="/vehiculo/add" method="post" class="needs-validation was-validated" novalidate>
 
+
   <div class="form-group">
 
-    <div class="form-group">
-        <label for="input-datalist">Usuario</label>
-        <input type="text" class="form-control" placeholder="Usuario" list="list-Usuario" name="idusuario" id="idusuario" placeholder="Seleccione usuario" required value="{{data.idusuario}}">
-        <datalist id="list-Usuario">
-            {{#each userdata}}
-                <option>{{this.nombres}} - {{this.userid}}</option>
-            {{/each}}
-        </datalist>
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Seleccione un nombre.
-        </div>
-    </div>
-
-
-    <label for="placa">Placa</label>
     <input type="text" class="form-control" name="placa" id="placa" placeholder="placa" autocomplete="off" required value="{{data.placa}}">
 
   </div>
 
-    <div class="form-group">
-        <label for="input-datalist">Tipo de vehiculo</label>
-        <input type="text" class="form-control" placeholder="Tipo de vehiculo" list="list-tipovehiculo" name="tipovehiculo" id="tipovehiculo" placeholder="Seleccione tipo" required value="{{data.tipovehiculo}}">
-        <datalist id="list-tipovehiculo">
-            {{#each estadoData}}
-                <option>{{this.NombreEstado}} - {{this.id}}</option>
-            {{/each}}
-        </datalist>
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Seleccione un nombre.
-        </div>
-    </div>
+  <div>
+      <select name="tipovehiculo" id="tipovehiculo">
+      <option value="" disabled selected>Tipo de Vehiculo</option>
+      {{#each tiposVehiculo}}
+            <option value="{{this.id_tipo_vehiculo}}">{{this.nombre_estado}}</option>
+      {{/each}}
+      </select>
+  </div>
+
+  <div>
+      <select name="tipofacturacion" id="tipofacturacion">
+      <option value="" disabled selected>Tipo de Facturacion</option>
+      {{#each tiposFacturacion}}
+            <option value="{{this.id_tipo_facturacion}}">{{this.nombre_estado}}</option>
+      {{/each}}
+      </select>
+  </div>
+
+  <div class="form-group">
+
+    <input type="text" class="form-control" name="parqueadero_asignado" id="parqueadero_asignado" placeholder="Parqueado asignado" autocomplete="off" value="{{data.parqueadero_asignado}}">
+
+  </div>
+
+
+  <div>
+      <select name="tipousuario" id="tipousuario">
+      <option value="" disabled selected>Tipo de Usuario</option>
+      {{#each tiposUsuario}}
+            <option value="{{this.id_tipo_usuario}}">{{this.nombre_estado}}</option>
+      {{/each}}
+      </select>
+  </div>
+
+
+
+
 
     <diV>
         <a>
@@ -53,6 +76,14 @@
 
 </form>
 
-</div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
 
 {{> footer}}

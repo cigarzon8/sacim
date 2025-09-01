@@ -6,6 +6,12 @@ const User = require('../model/Usuario');
 const Estado = require('../model/Estado')
 const auth = require('../midleware/auth')
 
+const TipousUsuario = require('../model/Tipos_usuario')
+const TipoFacturacion = require('../model/Tipos_facturacion')
+const TipousVehiculo = require('../model/Tipos_vehiculo')
+
+const procesoArray = require('../utils/procesoArray')
+
 router.get('/', auth,async function(req, res) {
   const placa = req.query.placa
   const filstro = 
@@ -13,22 +19,32 @@ router.get('/', auth,async function(req, res) {
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
-      attributes: ['NombreEstado'],
+      attributes: ['nombre_estado'],
     },
     {
-      model: Estado,
-      as: 'TipoVehiculoRelacion',
-      attributes: ['NombreEstado'],
+      model: TipousVehiculo,
+      as: 'TipoVehiculo',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipoFacturacion,
+      as: 'TipoFacturacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipousUsuario,
+      as: 'TipoUsuario',
+      attributes: ['nombre_estado'],
     }
-    ]
+  ]
   }
   if (placa) filstro.where = {placa}
 
   const vehiculo = await Vehiculo.findAll(filstro);
   const vehiculodata = vehiculo.map(vehi =>{
      const vehiculoJson = vehi.toJSON();
-    vehiculoJson.estado = vehi.EstadoRelacion.NombreEstado;
-    vehiculoJson.tipovehiculo = vehi.TipoVehiculoRelacion.NombreEstado;
+    vehiculoJson.estado = vehi.EstadoRelacion.nombre_estado;
+    vehiculoJson.tipovehiculo = vehi.TipoVehiculo.nombre_estado;
     vehiculoJson.idtipovehiculo = vehi.tipovehiculo
     return vehiculoJson
   } );
@@ -40,20 +56,31 @@ router.get('/', auth,async function(req, res) {
 
 
 router.get('/add',auth, async function(req, res) {
-    const users = await User.findAll();
-    const userdata = users.map(vehi => vehi.toJSON());
-    const Estados = await Estado.findAll({where:{seccion:'vehiculo'}})
-    const estadoData = Estados.map(est => est.toJSON());
-    res.render('vehiculo/add',{data:{},meesaje:{},userdata,estadoData});
+
+  const [
+    tiposEstado,
+    tiposVehiculo,
+    tiposFacturacion,
+    tiposUsuario
+  ] = await Promise.all([
+    Estado.findAll().then(procesoArray),
+    TipousVehiculo.findAll().then(procesoArray),
+    TipoFacturacion.findAll().then(procesoArray),
+    TipousUsuario.findAll().then(procesoArray),
+  ]);
+
+   const users = procesoArray(await User.findAll());  
+
+   res.render('vehiculo/add',{data:{},meesaje:{},tiposEstado,tiposVehiculo,tiposFacturacion,tiposUsuario,users});
 });
 
 router.post('/add',auth, async function(req, res) {
   req.body.estado = 1
+  req.body.id_proyecto = 1 
   let meesaje = {
     estado:'success',
-    text:'Usuario Creador correctamente'
+    text:'Vehiculo Creador correctamente'
   }
-
 
   for (let key in req.body) {
     if (req.body[key] === null) {
@@ -62,10 +89,6 @@ router.post('/add',auth, async function(req, res) {
       return res.render('vehiculo/add',{data:req.body,meesaje:meesaje});
     }
   }
-  console.log('req.body',req.body)
-  req.body.idusuario = req.body.idusuario.split(' - ')[1]
-  req.body.tipovehiculo = req.body.tipovehiculo.split(' - ')[1]
-  console.log('req.body',req.body)
   const vehiculo = new Vehiculo(req.body);
 
   try {

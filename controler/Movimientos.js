@@ -4,7 +4,7 @@ const Movimiento = require('../model/Movimientos');
 const Estado = require('../model/Estado')
 const Pagos = require('../model/Pago')
 const Valores = require('../model/Valores')
-
+const Vehiculo = require('../model/Vehiculo');
 const auth = require('../midleware/auth')
 
 router.get('/', auth,async function(req, res) {
@@ -12,16 +12,22 @@ router.get('/', auth,async function(req, res) {
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
-      attributes: ['NombreEstado'],
-    }
+      attributes: ['nombre_estado'],
+    },{
+      model: Vehiculo,
+      as: 'IdVehiculo',
+      attributes: ['placa'],
+    },
   ],limit:10
   });
 
   const vehiculodata = moimientos.map(parq =>{
-     const vehiculoJson = parq.toJSON();
-    vehiculoJson.estado = parq.EstadoRelacion.NombreEstado;
+    const vehiculoJson = parq.toJSON();
+    vehiculoJson.estado = parq.EstadoRelacion.nombre_estado;
+    vehiculoJson.placa = parq.IdVehiculo.placa
     return vehiculoJson
   } );
+  console.log('vehiculodata',vehiculodata)
   const values = ["#","Placa","Estado","Fecha Movimiento"]
   res.render('movimiento/list', {datalist:vehiculodata,headerlist:values});
 });

@@ -63,17 +63,15 @@ app.get('/', (req, res) => {
 app.use('/estados', estados);
 app.use('/proyecto',proyecto)
 app.use('/proyectopago',Proyectopago)
-
-
 app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
-app.use('/parqueadero',parqueaderoroute)
-app.use('/cobros',cobrosroute)
-
-app.use('/movimientos',movimientos)
-app.use('/pagos',pagos)
 app.use('/valores',valores)
+app.use('/movimientos',movimientos)
 
+app.use('/pagos',pagos)
+
+
+app.use('/parqueadero',parqueaderoroute)
 app.use('/api',api)
 
 app.listen(port, () => {

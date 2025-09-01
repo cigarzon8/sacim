@@ -195,7 +195,7 @@ async function initializeDatabase() {
         await Vehiculo.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
         await Vehiculo.belongsTo(TipousVehiculo, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });
         await Vehiculo.belongsTo(TipoFacturacion, { foreignKey: 'tipofacturacion', as: 'TipoFacturacion' });   
-        await Vehiculo.belongsTo(Estado, { foreignKey: 'tipousuario', as: 'TipoUsuario' });           
+        await Vehiculo.belongsTo(TipousUsuario, { foreignKey: 'tipousuario', as: 'TipoUsuario' });           
         
         const  ExistVehiculo =  await Vehiculo.findOne({limit:1});
         if (!ExistVehiculo){
@@ -215,12 +215,15 @@ async function initializeDatabase() {
         const  ExistValores =  await Valores.findOne({limit:1});
         if (!ExistValores){
             await Valores.bulkCreate([
-                {valor:1, estado:1 , tipovehiculo:13, tipofacturacion:19,id_proyecto:1},
-                {valor:1, estado:1 , tipovehiculo:13, tipofacturacion:22,id_proyecto:1},
-                {valor:1, estado:1 , tipovehiculo:14, tipofacturacion:19,id_proyecto:1},
-                {valor:1, estado:1 , tipovehiculo:14, tipofacturacion:22,id_proyecto:1},
-                {valor:1, estado:1 , tipovehiculo:15, tipofacturacion:19,id_proyecto:1},
-                {valor:1, estado:1 , tipovehiculo:15, tipofacturacion:22,id_proyecto:1}
+                {valor:1, estado:1 , tipovehiculo:13, tipofacturacion:2,id_proyecto:1},
+                {valor:2, estado:1 , tipovehiculo:13, tipofacturacion:3,id_proyecto:1},
+                {valor:2, estado:1 , tipovehiculo:13, tipofacturacion:5,id_proyecto:1},
+                {valor:3, estado:1 , tipovehiculo:14, tipofacturacion:2,id_proyecto:1},
+                {valor:4, estado:1 , tipovehiculo:14, tipofacturacion:3,id_proyecto:1},
+                {valor:4, estado:1 , tipovehiculo:14, tipofacturacion:5,id_proyecto:1},
+                {valor:5, estado:1 , tipovehiculo:15, tipofacturacion:2,id_proyecto:1},
+                {valor:6, estado:1 , tipovehiculo:15, tipofacturacion:3,id_proyecto:1},
+                {valor:6, estado:1 , tipovehiculo:15, tipofacturacion:5,id_proyecto:1}
             ]);
         }
 
@@ -234,8 +237,8 @@ async function initializeDatabase() {
         const  ExistMovimiento =  await Movimiento.findOne({limit:1});
         if (!ExistMovimiento){
             await Movimiento.bulkCreate([
-                { estado:1 , id_vehiculo:13, tipo_movimiento:16, id_proyecto:1},
-                { estado:1 , id_vehiculo:13, tipo_movimiento:17, id_proyecto:1},
+                { estado:1 , id_vehiculo:1, tipo_movimiento:1, id_proyecto:1},
+                { estado:1 , id_vehiculo:1, tipo_movimiento:2, id_proyecto:1},
             ]);
         }
 
@@ -261,7 +264,7 @@ async function initializeDatabase() {
 
         await Pago.sync({ force: true });
         await Pago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
-        await Pago.belongsTo(Estado, { foreignKey: 'estado_pago', as: 'EstadoPago' });        
+        await Pago.belongsTo(TipoPagos, { foreignKey: 'estado_pago', as: 'EstadoPago' });        
         await Pago.belongsTo(Estado, { foreignKey: 'tiporenta', as: 'TipoRenta' });
         await Pago.belongsTo(Movimiento, { foreignKey: 'id_movimiento_ngreso', as: 'MovimientoIgreso' });
         await Pago.belongsTo(Movimiento, { foreignKey: 'id_movimiento_salida', as: 'MovimientoSalida' });        
@@ -277,9 +280,9 @@ async function initializeDatabase() {
                     estado:1,
                     id_movimiento_ngreso:1,
                     id_movimiento_salida:1,
-                    estado_pago:6,
-                    tiporenta:23,
-                    id_usuario:2,
+                    estado_pago:1,
+                    tiporenta:1,
+                    id_usuario:1,
                     id_proyecto:1,
                     Valor:1,
                     duracion_parqueo:1},
