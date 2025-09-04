@@ -119,9 +119,9 @@ async function initializeDatabase() {
         if (!ExistTipousVehiculo){
             await TipousVehiculo.bulkCreate([
 
-                { id_tipo_vehiculo: 13, nombre_estado: 'Bicicleta'},
-                { id_tipo_vehiculo: 14, nombre_estado: 'Carro'},
-                { id_tipo_vehiculo: 15, nombre_estado: 'Motocileta'},
+                { id_tipo_vehiculo: 1, nombre_estado: 'Bicicleta'},
+                { id_tipo_vehiculo: 2, nombre_estado: 'Carro'},
+                { id_tipo_vehiculo: 3, nombre_estado: 'Motocileta'},
 
             ]);
         }
@@ -247,14 +247,13 @@ async function initializeDatabase() {
         await Parqueadero.sync({ force: true });
         await Parqueadero.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
         await Parqueadero.belongsTo(TipousVehiculo, { foreignKey: 'tipovehiculo', as: 'TipoVehiculo' });        
-        await Parqueadero.belongsTo(TipoParqueadero, { foreignKey: 'tipoveparqueadero', as: 'TipoveParqueadero' });
         await Parqueadero.belongsTo(TipousUsuario, { foreignKey: 'tipousuario', as: 'TipoUsuario' });          
         
 
         const  ExistParqueadero =  await Parqueadero.findOne({limit:1});
         if (!ExistParqueadero){
             await Parqueadero.bulkCreate([
-                { estado:1, tipovehiculo:13 , tipoveparqueadero:13, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:24},
+                { estado:1, tipovehiculo:1 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
             ]);
         }
 

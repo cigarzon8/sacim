@@ -48,7 +48,6 @@ router.get('/', auth,async function(req, res) {
 
   const vehiculodata = moimientos.map(parq =>{
     const vehiculoJson = parq.toJSON();
-    console.log('vehiculoJson',vehiculoJson)
     vehiculoJson.estado = parq.EstadoRelacion.nombre_estado;
     vehiculoJson.usuario = parq.IdUsuario.nombres
     vehiculoJson.placa = parq.IdVehiculo.placa

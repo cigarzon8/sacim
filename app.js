@@ -67,7 +67,6 @@ app.use('/user', userroute);
 app.use('/vehiculo',vehiculeroute)
 app.use('/valores',valores)
 app.use('/movimientos',movimientos)
-
 app.use('/pagos',pagos)
 
 

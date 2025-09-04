@@ -20,11 +20,6 @@ const Parqueadero = sequelize.define(
       allowNull: false,
       required: true,
     },
-    tipoveparqueadero: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        required: true,
-    },
     tipousuario: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -40,6 +35,11 @@ const Parqueadero = sequelize.define(
         allowNull: false,
         required: true,
     },
+    ocupacion: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        required: true,
+    }
   }
 );
 

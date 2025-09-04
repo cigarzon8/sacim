@@ -1,38 +1,92 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/parqueadero">List</a>
+<!-- contact section -->
 
-<form  id="useradd" action="/parqueadero/add" method="post" class="needs-validation was-validated" novalidate>
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Parqueadero
+        </h3>
+    </div>
+    <br>
 
-  <div class="form-group">
-
-    <div class="form-group">
-        <label for="input-datalist">Tipo Parqueadero</label>
-        <input type="text" class="form-control" placeholder="Tipo parqueadero" list="list-Usuario" name="tipoveparqueadero" id="tipoveparqueadero" placeholder="Seleccione un tipo" required value="{{data.idusuario}}" autocomplete="off">
-        <datalist id="list-Usuario">
-            {{#each estadoData}}
-                <option>{{this.NombreEstado}} - {{this.id}}</option>
-            {{/each}}
-        </datalist>
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Seleccione un nombre.
-        </div>
+    <div class="container text-center my-3">
+        <a class="btn btn-primary" href="/parqueadero">
+            Lista <i class="fa-solid fa-list ms-2"></i>
+        </a>
     </div>
 
-  </div>
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
 
-    <diV>
-        <a>
-            <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
-        </a>
-    </diV>
 
-</form>
 
-</div>
+                <form action="/parqueadero/add" method="post" class="needs-validation">
+
+                    <div class="form-group">
+
+                        <div>
+                            <select name="tipovehiculo" id="tipovehiculo">
+                            <option value="" disabled selected>Tipo de veiculo</option>
+                            {{#each data.allparameter.TipousVehiculos}}
+                                <option value="{{this.id_tipo_vehiculo}}">{{this.nombre_estado}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+
+                        <div>
+                            <select name="tipousuario" id="tipousuario" >
+                            <option value="" disabled selected>Tipo de usuario</option>
+                            {{#each data.allparameter.TipousUsuarios}}
+                                <option value="{{this.id_tipo_usuario}}">{{this.nombre_estado}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="capacidad" id="capacidad" placeholder="Cantidad de parqueaderos" autocomplete="off" required value="{{data.parqueadero.capacidad}}">
+                        <div class="valid-feedback">
+                        ok!
+                        </div>
+                        <div class="invalid-feedback">
+                        Asigne cantidad de parqueaderos.
+                        </div>
+                    </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="d-flex justify-content-center ">
+                        {{#if data.parqueadero.id_parqueadero}}
+                            <input type="hidden" name="id_parqueadero" id="id_parqueadero" placeholder="id_parqueadero" value="{{data.parqueadero.id_parqueadero}}">
+                            <diV>
+                                <a>
+                                    <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">guardar</button>
+                                </a>
+                            </diV>
+
+                        {{else}}
+                            <diV>
+                                <a>
+                                    <button class="btn btn-primary"  type="submit" value="Ingresar" id="ingresar">Crear</button>
+                                </a>
+                            </diV>
+                        {{/if}}
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
 {{> footer}}
