@@ -14,8 +14,6 @@ const estados = require('./controler/Estados')
 const proyecto = require('./controler/Proyecto')
 const Proyectopago = require('./controler/Proyectopago')
 
-
-
 const userroute = require('./controler/user');
 const vehiculeroute = require('./controler/vehiculo')
 const parqueaderoroute = require('./controler/parqueadero')
