@@ -22,6 +22,7 @@ const cobrosroute = require('./controler/cobros')
 const movimientos = require('./controler/Movimientos')
 const pagos = require('./controler/Pagos')
 const valores = require('./controler/Valores')
+const informes = require('./controler/Iformes')
 const api = require('./appi/routes')
 
 
@@ -66,8 +67,7 @@ app.use('/vehiculo',vehiculeroute)
 app.use('/valores',valores)
 app.use('/movimientos',movimientos)
 app.use('/pagos',pagos)
-
-
+app.use('/informes',informes)
 app.use('/parqueadero',parqueaderoroute)
 app.use('/api',api)
 

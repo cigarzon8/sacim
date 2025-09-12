@@ -42,10 +42,11 @@ router.get('/', auth,async function(req, res) {
 
   const vehiculo = await Vehiculo.findAll(filstro);
   const vehiculodata = vehiculo.map(vehi =>{
-     const vehiculoJson = vehi.toJSON();
+    const vehiculoJson = vehi.toJSON();
+    console.log('vehi',vehi.TipoVehiculo)
     vehiculoJson.estado = vehi.EstadoRelacion.nombre_estado;
     vehiculoJson.tipovehiculo = vehi.TipoVehiculo.nombre_estado;
-    vehiculoJson.idtipovehiculo = vehi.tipovehiculo
+    vehiculoJson.idtipovehiculo = vehi.TipoVehiculo
     return vehiculoJson
   } );
   const users = await User.findAll();

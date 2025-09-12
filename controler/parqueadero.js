@@ -62,6 +62,8 @@ router.get('/add',auth, async function(req, res) {
 
 router.post('/add',auth, async function(req, res) {
   console.log('req.body',req.body)
+  req.body.id_proyecto = 1 
+  req.body.ocupacion = 0
   req.body.estado = 1
   let meesaje = {
     estado:'success',

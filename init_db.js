@@ -200,7 +200,7 @@ async function initializeDatabase() {
         const  ExistVehiculo =  await Vehiculo.findOne({limit:1});
         if (!ExistVehiculo){
             await Vehiculo.bulkCreate([
-                {id_vehiculo:1, placa:"aaa1111", tipovehiculo:13, tipofacturacion:23,estado:1,id_proyecto:1, parqueadero_asignado:"aaa111",tipousuario:24}
+                {id_vehiculo:1, placa:"aaa1111", tipovehiculo:1, tipofacturacion:23,estado:1,id_proyecto:1, parqueadero_asignado:"aaa111",tipousuario:24}
             ]);
         }
 
@@ -215,15 +215,15 @@ async function initializeDatabase() {
         const  ExistValores =  await Valores.findOne({limit:1});
         if (!ExistValores){
             await Valores.bulkCreate([
-                {valor:1, estado:1 , tipovehiculo:13, tipofacturacion:2,id_proyecto:1},
-                {valor:2, estado:1 , tipovehiculo:13, tipofacturacion:3,id_proyecto:1},
-                {valor:2, estado:1 , tipovehiculo:13, tipofacturacion:5,id_proyecto:1},
-                {valor:3, estado:1 , tipovehiculo:14, tipofacturacion:2,id_proyecto:1},
-                {valor:4, estado:1 , tipovehiculo:14, tipofacturacion:3,id_proyecto:1},
-                {valor:4, estado:1 , tipovehiculo:14, tipofacturacion:5,id_proyecto:1},
-                {valor:5, estado:1 , tipovehiculo:15, tipofacturacion:2,id_proyecto:1},
-                {valor:6, estado:1 , tipovehiculo:15, tipofacturacion:3,id_proyecto:1},
-                {valor:6, estado:1 , tipovehiculo:15, tipofacturacion:5,id_proyecto:1}
+                {valor:1, estado:1 , tipovehiculo:1, tipofacturacion:2,id_proyecto:1},
+                {valor:2, estado:1 , tipovehiculo:1, tipofacturacion:3,id_proyecto:1},
+                {valor:2, estado:1 , tipovehiculo:1, tipofacturacion:5,id_proyecto:1},
+                {valor:3, estado:1 , tipovehiculo:2, tipofacturacion:2,id_proyecto:1},
+                {valor:4, estado:1 , tipovehiculo:2, tipofacturacion:3,id_proyecto:1},
+                {valor:4, estado:1 , tipovehiculo:2, tipofacturacion:5,id_proyecto:1},
+                {valor:5, estado:1 , tipovehiculo:3, tipofacturacion:2,id_proyecto:1},
+                {valor:6, estado:1 , tipovehiculo:3, tipofacturacion:3,id_proyecto:1},
+                {valor:6, estado:1 , tipovehiculo:3, tipofacturacion:5,id_proyecto:1}
             ]);
         }
 
