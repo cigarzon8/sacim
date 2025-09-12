@@ -35,7 +35,6 @@ router.get('/backup', async function (req, res) {
   ],      raw: true,
       nest: true,
   });
-console.log('parqueaderos',parqueaderos)
     // Definir cabeceras del CSV
     const csvStringifier = createObjectCsvStringifier({
       header: [
@@ -69,6 +68,9 @@ console.log('parqueaderos',parqueaderos)
   }
 });
 
+router.get('/ocupacionparqueadero', auth,async function(req, res) {
+  res.render('informes/ocupacionparqueadero', {});
+});
 
 
 module.exports = router;

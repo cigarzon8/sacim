@@ -1,0 +1,77 @@
+{{> layout}}
+{{> header}}
+{{> nav}}
+
+<!-- contact section -->
+<script src="/static/chart.umd.js"></script>
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Ocupacion Parqueaderos
+        </h3>
+    </div>
+    <br>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+              <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+
+<script type="module">
+  const response = await fetch('/api/ocupacionparqueadero');
+  const datos = await response.json();
+
+  const ctx = document.getElementById('myChart');
+
+  const labels = [];
+  const ocupacion = [];
+  const capacidad = []; // segunda línea
+
+  // Recorrer los datos
+  datos.vehiculodata.forEach((item) => {
+    labels.push(item.tipoVehiculo + '-' + item.tipoUsuario);
+    ocupacion.push(item.ocupacion);
+    capacidad.push(item.capacidad); // <-- supongo que tu API tiene este campo
+  });
+
+
+  new Chart(ctx, {
+    type: 'bar', // para que se vean líneas
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Ocupación',
+          data: ocupacion,
+          borderWidth: 2,
+          borderColor: 'blue'
+        },
+        {
+          label: 'Capacidad',
+          data: capacidad,
+          borderWidth: 2,
+          borderColor: 'red'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+{{> footer}}

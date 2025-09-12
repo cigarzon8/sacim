@@ -5,11 +5,44 @@ const Estado = require('../model/Estado');
 const Cobro = require('../model/Cobros');
 const Parqueadero = require('../model/Parqueadero');
 const Vehiculo = require('../model/Vehiculo');
-
+const TipousVehiculo = require('../model/Tipos_vehiculo')
+const TipousUsuario = require('../model/Tipos_usuario')
 //const authapi = require('../midleware/auth')
 
-router.get('/', async function (req, res) {
-    res.json({ Message: 'Bienvenido Sena' })
+router.get('/ocupacionparqueadero', async function (req, res) {
+
+  const parqueo = await Parqueadero.findAll({
+    include: [{
+      model: Estado,
+      as: 'EstadoRelacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+        model: TipousVehiculo,
+        as: 'TipoVehiculo',
+        attributes: ['nombre_estado'],
+    },
+    {
+        model: TipousUsuario,
+        as: 'TipoUsuario',
+        attributes: ['nombre_estado'],
+    }
+
+    
+  ]
+  });
+
+  const vehiculodata = parqueo.map(parq =>{
+    const vehiculoJson = parq.toJSON();
+    vehiculoJson.estado = parq.EstadoRelacion.nombre_estado;
+    vehiculoJson.tipoVehiculo = parq.TipoVehiculo.nombre_estado;
+    vehiculoJson.tipoUsuario = parq.TipoUsuario.nombre_estado;
+    vehiculoJson.disponibles = parq.capacidad - parq.ocupacion;
+    return vehiculoJson
+  } );
+
+  console.log('vehiculodata',vehiculodata)
+    res.json({ vehiculodata})
 });
 
 router.post('/auth', async function (req, res) {
