@@ -54,6 +54,9 @@ app.use(bodyParser.json());
 app.use('/static', express.static(path.join(__dirname, 'public')));
 console.log(path.join(__dirname, 'public','img', 'favicon.ico'))
 app.get('/', (req, res) => {
+    res.render('landing');
+});
+app.get('/login', (req, res) => {
     res.render('login');
 });
 

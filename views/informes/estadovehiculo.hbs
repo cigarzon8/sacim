@@ -1,0 +1,75 @@
+{{> layout}}
+{{> header}}
+{{> nav}}
+
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Estado de vehiculo
+        </h3>
+    </div>
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form action="/informes/estadoplaca" method="get" class="needs-validation">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="placa" id="placa" placeholder="Ingrese placa" autocomplete="off" required value="{{data.placa}}">
+                        <div class="valid-feedback">
+                        ok!
+                        </div>
+                        <div class="invalid-feedback">
+                        Asigne cantidad de parqueaderos.
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </div>
+        {{#if data.vehiculodata}}
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <h4 class=" ">
+                        Ultimos movimientos
+                    </h4>
+                    <div>
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            {{#each headerlist}}
+                                <th scope="row">{{this}}</th>
+                            {{/each}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data.Movimientodata}}
+                                <tr>
+                                <td>{{this.createdAt}}</td>
+                                <td>{{this.estado}}</td>
+                                </tr>
+                            {{/each}}
+
+                        </tbody>
+                        </table>                    
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <h4 class=" ">
+                        Caracteristicas Vehiculo
+                    </h4>
+                    <div class="col-md-3">
+                        <p>tipovehiculo: {{data.vehiculodata.tipovehiculo}}</p>
+                    </div>
+
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</section>
+
+
+
+{{> footer}}

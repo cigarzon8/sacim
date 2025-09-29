@@ -14,6 +14,8 @@ const TipousVehiculo = require('../model/Tipos_vehiculo')
 const TipousUsuario = require('../model/Tipos_usuario')
 const procesoArray = require('../utils/procesoArray')
 const auth = require('../midleware/auth')
+const TipoFacturacion = require('../model/Tipos_facturacion')
+const TipoMovimiento = require('../model/Tipos_movimiento')
 
 
 router.get('/', auth,async function(req, res) {
@@ -32,7 +34,7 @@ router.get('/backup', async function (req, res) {
       as: 'IdVehiculo',
       attributes: ['placa'],
     },
-  ],      raw: true,
+  ],  raw: true,
       nest: true,
   });
     // Definir cabeceras del CSV
@@ -68,8 +70,65 @@ router.get('/backup', async function (req, res) {
   }
 });
 
-router.get('/ocupacionparqueadero', auth,async function(req, res) {
-  res.render('informes/ocupacionparqueadero', {});
+router.get('/estadoplaca', auth,async function(req, res) {
+  console.log('placa',req.query.placa)
+  let placa = req.query.placa
+  let vehiculodata ={}
+  let id_vehiculo = null
+  const filstro = 
+  {
+    include: [{
+      model: Estado,
+      as: 'EstadoRelacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipousVehiculo,
+      as: 'TipoVehiculo',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipoFacturacion,
+      as: 'TipoFacturacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipousUsuario,
+      as: 'TipoUsuario',
+      attributes: ['nombre_estado'],
+    }
+  ]
+  }
+  if (placa){
+    filstro.where = {placa}
+      vehiculodata = await Vehiculo.findOne(filstro);
+      if(vehiculodata?.dataValues){
+        id_vehiculo = vehiculodata.dataValues.id_vehiculo
+        vehiculodata.dataValues.estado = vehiculodata.dataValues.EstadoRelacion.nombre_estado;
+        vehiculodata.dataValues.tipovehiculo = vehiculodata.dataValues.TipoVehiculo.nombre_estado;
+        vehiculodata.dataValues.idtipovehiculo = vehiculodata.dataValues.TipoVehiculo
+        vehiculodata = vehiculodata.toJSON();
+      }
+  }
+  
+  const moimientos = await Movimiento.findAll({
+    include: [{
+      model: TipoMovimiento,
+      as: 'TipoMovimiento',
+      attributes: ['nombre_estado'],
+    }
+  ],limit:4,where:{id_vehiculo}
+  });
+  const Movimientodata = moimientos.map(parq =>{
+    const vehiculoJson = parq.toJSON();
+    vehiculoJson.estado = parq.TipoMovimiento.nombre_estado;
+    return vehiculoJson
+  } );
+
+  var data = {placa,Movimientodata,vehiculodata}
+  console.log('data',data)
+  const values = ["hora","Tipo"]
+  res.render('informes/estadovehiculo', {data,headerlist:values});
 });
 
 
