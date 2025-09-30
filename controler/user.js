@@ -6,6 +6,7 @@ const Estado = require('../model/Estado')
 const TipoDocumentos = require('../model/Tipos_documentos')
 const auth = require('../midleware/auth')
 const procesoArray = require('../utils/procesoArray')
+const Parqueadero = require('../model/Parqueadero');
 
 router.get('/', auth,async function(req, res) {
   const users = await User.findAll({
@@ -30,7 +31,17 @@ router.get('/', auth,async function(req, res) {
 });
 
 router.get('/bienvenido',auth, async function(req, res) {
-  res.render('bienvenido');
+
+  const parqueadero = await Parqueadero.findOne({
+        where: {
+            id_proyecto: 1,
+        }
+    });
+  
+  const vacias = parqueadero?.dataValues?.capacidad
+  const Ocupadas = parqueadero?.dataValues?.ocupacion
+
+  res.render('bienvenido',{vacias,Ocupadas});
 });
 
 router.post('/auth', async function(req, res) {
@@ -101,7 +112,6 @@ router.post('/myprofile',auth, async function(req, res) {
     res.render('user/add',{data:req.body,tiposDocumentos,meesaje:meesaje});
   }
 });
-
 
 router.post('/add',auth, async function(req, res) {
   req.body.id_proyecto = 1 

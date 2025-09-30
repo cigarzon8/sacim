@@ -1,23 +1,36 @@
 {{> layout}}
 {{> header}}
 {{> nav}}
-<div class="container-xxl container-xxlRolando">
 
-    <h1>Celdas:</h1>
-    <p><strong>Vacias:    </strong> 55 
-    </p>
-    <p><strong>Ocupadas:    </strong>2
-    </p>      
-</div>
-<div class="container-xx3">
-    <form method="GET" action="/vehiculo">
-        <p>
-            <strong>Placa:    </Strong>
-            <input type="text" value="" name="placa">
-            <img class="img" src="/static/img/lupaweb.jpg" width="30" height="30">
-            <button class="btn btn-primary"  type="submit" value="Buscar">Buscar</button>
+<!-- contact section -->
+<section class="contact_section layout_padding position-relative">
+    <div class="custom_heading-container">
+        <h3>Bienvenido</h3>
+    </div>
 
-        </p>
-    </form>
-</div>
+    <!-- Card en la esquina superior derecha -->
+    <div class="position-absolute top-0 end-0 p-3" style="z-index:10;">
+        <div class="card shadow-lg border-0 rounded-3" style="min-width:180px;">
+            <div class="card-body text-center">
+                <p class="mb-2"><strong>Vacías:</strong> {{vacias}}</p>
+                <p class="mb-0"><strong>Ocupadas:</strong> {{Ocupadas}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <form method="GET" action="/vehiculo">
+                <p>
+                    <strong>🔍 Placa: </Strong>
+                    <input type="text" value="" name="placa">
+                    <div class="d-flex justify-content-center ">
+                        <button class="btn btn-primary"  type="submit" value="Buscar">Buscar</button> 
+                    </div>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
 {{> footer}}
