@@ -847,3 +847,22 @@ Responsibe
   text-align: center;
   font-size: 28px;
 }
+
+.vehiculo-card {
+  width: 8rem;
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.3s ease;
+}
+
+/* Cuando está seleccionado */
+.btn-check:checked + .vehiculo-card {
+  background-color: #ff4f5a;
+  color: #fff; /* Texto e ícono en blanco */
+  border-color: #ff4f5a;
+}
+
+/* Hover (opcional para mejor UX) */
+.vehiculo-card:hover {
+  border-color: #ff4f5a;
+}

@@ -38,9 +38,9 @@ const Vehiculo = sequelize.define(
     },
     parqueadero_asignado: {
       type: DataTypes.STRING(100),
-      allowNull: false,
-      required: true,
-      unique: true,
+      allowNull: true,
+      required: false,
+      unique: false,
     },
     tipousuario: {
         type: DataTypes.INTEGER,

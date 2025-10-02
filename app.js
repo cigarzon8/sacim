@@ -37,6 +37,11 @@ app.engine('hbs', engine({
     extname: 'hbs',
     defaultLayout: false, // Deshabilitar el uso de un layout predeterminado
     partialsDir: __dirname + '/views/partials', // Directorio de los parciales
+    helpers: {
+        eq: function (a, b) {
+            return a === b;
+        }
+    }
 }));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views'); // Directorio de las vistas
@@ -77,3 +82,4 @@ app.use('/api',api)
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+

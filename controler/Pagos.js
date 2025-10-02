@@ -5,6 +5,7 @@ const Estado = require('../model/Estado')
 const User = require('../model/Usuario');
 const Movimiento = require('../model/Movimientos')
 const Vehiculo = require('../model/Vehiculo')
+const TipoFacturacion = require('../model/Tipos_facturacion')
 const auth = require('../midleware/auth')
 
 router.get('/', auth,async function(req, res) {
@@ -14,11 +15,11 @@ router.get('/', auth,async function(req, res) {
       as: 'EstadoRelacion',
       attributes: ['nombre_estado'],
     },
-    /*{
-      model: Estado,
-      as: 'EstadoTiporenta',
+    {
+      model: TipoFacturacion,
+      as: 'TipoRenta',
       attributes: ['nombre_estado'],
-    },*/{
+    },{
       model: User,
       as: 'IdUsuario',
       attributes: ['nombres'],
@@ -52,8 +53,9 @@ router.get('/', auth,async function(req, res) {
     vehiculoJson.usuario = parq.IdUsuario.nombres
     vehiculoJson.placa = parq.IdVehiculo.placa
     
+    //console.log('parq',parq.TipoRenta.dataValues.nombre_estado)
     //vehiculoJson.proyecto = parq.EstadoProyecto.nombre
-    //vehiculoJson.tiporenta = parq.EstadoTiporenta.NombreEstado
+    vehiculoJson.tiporenta = parq.TipoRenta.dataValues.nombre_estado
     vehiculoJson.idIngreso = new Date(parq.MovimientoIgreso.createdAt).toLocaleString();
     vehiculoJson.idSalida =  new Date(parq.MovimientoSalida.createdAt).toLocaleString();
     return vehiculoJson

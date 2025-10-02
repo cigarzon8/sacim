@@ -1,36 +1,68 @@
 {{> layout}}
 {{> nav}}
-<div class="container-xx3">
-<a href="/movimientos">List</a>
 
-<form  id="useradd" action="/movimientos/add" method="post" class="needs-validation was-validated" novalidate>
 
-  <div class="form-group">
-
-    <div class="form-group">
-        <label for="input-datalist">Placa</label>
-    <input type="text" class="form-control" name="placa" id="placa" placeholder="ABC2123" autocomplete="off" required value="{{data.nombre}}">
-
-        <div class="valid-feedback">
-        ok!
-        </div>
-        <div class="invalid-feedback">
-        Asigne un Placa.
-        </div>
+<section class="contact_section layout_padding">
+    <div class="custom_heading-container">
+        <h3 class=" ">
+            Movimientos
+        </h3>
     </div>
 
+
+    <div class="container layout_padding2-top">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+<form id="useradd" action="/movimientos/add" method="post" class="needs-validation was-validated" novalidate>
+
+  <!-- Campo Placa -->
+  <div class="form-group mb-3">
+    <input type="text" class="form-control" name="placa" id="placa" placeholder="ABC2123"
+      autocomplete="off" required value="{{data.nombre}}">
+    <div class="invalid-feedback">Asigne una Placa.</div>
   </div>
 
-    <diV>
-        <a>
-            <button class="btn btn-success" name="estado" type="submit" value="Ingresar" id="ingresar">Ingreso</button>
-        </a>
-        <a>
-            <button class="btn btn-danger" name="estado" type="submit" value="Salida" id="Salida">Salida</button>
-        </a>
-    </diV>
+  <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+    {{#each data.tiposdevehiculolist}}
+        <input 
+        type="radio" 
+        class="btn-check" 
+        name="tipovehiculo" 
+        id="vehiculo-{{this.id_tipo_vehiculo}}" 
+        value="{{this.id_tipo_vehiculo}}" 
+        required 
+        autocomplete="off"
+        >
+
+        <label class="card vehiculo-card shadow-sm p-3 text-center" 
+            for="vehiculo-{{this.id_tipo_vehiculo}}">
+        <div>
+            {{#if (eq nombre_estado "Bicicleta")}} 🚲 {{/if}}
+            {{#if (eq nombre_estado "Carro")}} 🚗 {{/if}}
+            {{#if (eq nombre_estado "Motocileta")}} 🏍️ {{/if}}
+            <div><span>{{this.nombre_estado}}</span></div>
+        </div>
+        </label>
+    {{/each}}
+  </div>
+
+  <!-- Botones -->
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-success" name="tipo_movimiento" type="submit" value="Ingresar" id="ingresar">
+      Ingreso
+    </button>
+    <button class="btn btn-danger" name="tipo_movimiento" type="submit" value="Salida" id="Salida">
+      Salida
+    </button>
+  </div>
 </form>
 
-</div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
 
 {{> footer}}

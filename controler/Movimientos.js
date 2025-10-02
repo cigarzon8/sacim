@@ -6,12 +6,17 @@ const Pagos = require('../model/Pago')
 const Valores = require('../model/Valores')
 const Vehiculo = require('../model/Vehiculo');
 const auth = require('../midleware/auth')
+const procesoArray = require('../utils/procesoArray')
+const TipousUsuario = require('../model/Tipos_usuario')
+const TipoFacturacion = require('../model/Tipos_facturacion')
+const TipousVehiculo = require('../model/Tipos_vehiculo')
+const TipoMovimiento = require('../model/Tipos_movimiento')
 
 router.get('/', auth,async function(req, res) {
   const moimientos = await Movimiento.findAll({
     include: [{
-      model: Estado,
-      as: 'EstadoRelacion',
+      model: TipoMovimiento,
+      as: 'TipoMovimiento',
       attributes: ['nombre_estado'],
     },{
       model: Vehiculo,
@@ -23,60 +28,99 @@ router.get('/', auth,async function(req, res) {
 
   const vehiculodata = moimientos.map(parq =>{
     const vehiculoJson = parq.toJSON();
-    vehiculoJson.estado = parq.EstadoRelacion.nombre_estado;
+    vehiculoJson.estado = parq.TipoMovimiento.nombre_estado;
     vehiculoJson.placa = parq.IdVehiculo.placa
     return vehiculoJson
   } );
-  console.log('vehiculodata',vehiculodata)
-  const values = ["#","Placa","Estado","Fecha Movimiento"]
+  const values = ["#","Placa","Tipo Movimiento","Fecha Movimiento"]
   res.render('movimiento/list', {datalist:vehiculodata,headerlist:values});
 });
 
-
 router.get('/add',auth, async function(req, res) {
-    res.render('movimiento/add',{data:{},meesaje:{}});
+  const TiposdeVehiculos = await TipousVehiculo.findAll();
+  const tiposdevehiculolist = await procesoArray(TiposdeVehiculos)
+  res.render('movimiento/add',{data:{tiposdevehiculolist},meesaje:{}});
 });
 
 router.post('/add',auth, async function(req, res) {
-  if(req.body.estado  == 'Ingresar'){
-    req.body.estado = 7;
-  }
-  if(req.body.estado  == 'Salida'){
-    req.body.estado = 8;
-  }
-  
-  let meesaje = {
-    estado:'success',
-    text:'Usuario Creador correctamente'
-  }
-
-
-  for (let key in req   .body) {
-    if (req.body[key] === null) {
-      meesaje.estado = 'danger',
-      meesaje.text = 'Diligencie todos los campos'
-      return res.render('movimiento/add',{data:req.body,meesaje:meesaje});
+  console.log('req.body',req.body)
+   req.body.id_proyecto = 1 
+   req.body.estado = 1 
+  const placa = req.body.placa
+  const filstro = 
+  {
+    include: [{
+      model: Estado,
+      as: 'EstadoRelacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipousVehiculo,
+      as: 'TipoVehiculo',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipoFacturacion,
+      as: 'TipoFacturacion',
+      attributes: ['nombre_estado'],
+    },
+    {
+      model: TipousUsuario,
+      as: 'TipoUsuario',
+      attributes: ['nombre_estado'],
     }
+  ]
   }
-  const movimiento = new Movimiento(req.body);
+  if (placa) filstro.where = {placa}
 
-  try {
-    const moviemtosnuevo = await movimiento.save();
-    if (req.body.estado == 7){
-      savepago(moviemtosnuevo.toJSON())
-    }
-    console.log('req.body.estado',req.body.estado)
-    if (req.body.estado == 8){
-      
-      exitSavePago(moviemtosnuevo.toJSON())
-    }
+  let vehiculo = await Vehiculo.findOne(filstro);
 
-    res.redirect('/movimientos');
-  } catch (error) {
-    meesaje.estado = 'danger',
-    meesaje.text = 'Correo o documento duplicado'+error
-    res.render('movimiento/add',{data:req.body,meesaje:meesaje});
+  if(req.body.tipo_movimiento  == 'Ingresar'){
+    req.body.tipo_movimiento = 1;
   }
+  if(req.body.tipo_movimiento  == 'Salida'){
+    req.body.tipo_movimiento = 2;
+  }
+
+  if (vehiculo){
+    req.body.id_vehiculo = vehiculo.dataValues.id_vehiculo
+  }else{
+    vehiculo = {
+      placa,
+      tipovehiculo:req.body.tipovehiculo,
+      tipofacturacion:2,
+      estado:1,
+      id_proyecto:1,
+      parqueadero_asignado:null,
+      tipousuario:2}
+      VehiculoNuevo = new Vehiculo(vehiculo)
+      vehiculo = await VehiculoNuevo.save();
+      req.body.id_vehiculo = vehiculo.dataValues.id_vehiculo
+    }
+    MovimientoNuevo = new Movimiento(req.body)
+    const movimientoNuevo2 = await MovimientoNuevo.save();
+
+    const pagosobject = {
+      id_vehiculo:req.body.id_vehiculo, 
+      estado:1,
+      id_movimiento_ngreso:movimientoNuevo2.dataValues.id_movimiento,
+      id_movimiento_salida:movimientoNuevo2.dataValues.id_movimiento,
+      estado_pago:1,
+      tiporenta: vehiculo.dataValues.tipofacturacion,
+      id_usuario:1,
+      id_proyecto:1,
+      Valor:0,
+      duracion_parqueo:0
+    }
+    const pago = await new Pagos(pagosobject).save();
+    const TiposdeVehiculos = await TipousVehiculo.findAll();
+    const tiposdevehiculolist = await procesoArray(TiposdeVehiculos)
+    let meesaje = {
+     estado:'success',
+     text:'Movimiento registrados correctaente'
+    }
+    return res.render('movimiento/add',{data:{tiposdevehiculolist},meesaje});
+
 });
 async function savepago(idingreso,idsalida=0) {
   const pagonuevo ={

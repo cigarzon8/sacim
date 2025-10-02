@@ -44,6 +44,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/informes"> Informes </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pagos"> Pagos </a>
+            </li>
 
 
             <li class="nav-item">
@@ -64,20 +67,20 @@
 
 
 {{#if meesaje}}
-
-<section class="contact_section layout_padding">
-  <div class="container my-3">
-    <div class="row">
-      <div class="col-md-2"></div> <!-- espacio izquierdo -->
-      <div class="col-md-8">
-        <div class="alert alert-{{meesaje.estado}}" role="alert">
-          {{meesaje.text}}
+    {{#if meesaje.text}}
+    <section class="contact_section layout_padding">
+    <div class="container my-3">
+        <div class="row">
+        <div class="col-md-2"></div> <!-- espacio izquierdo -->
+        <div class="col-md-8">
+            <div class="alert alert-{{meesaje.estado}}" role="alert">
+            {{meesaje.text}}
+            </div>
         </div>
-      </div>
-      <div class="col-md-2"></div> <!-- espacio derecho -->
+        <div class="col-md-2"></div> <!-- espacio derecho -->
+        </div>
     </div>
-  </div>
-</section>
-
+    </section>
+    {{/if}}
 {{/if}}
 
