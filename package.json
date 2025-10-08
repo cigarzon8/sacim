@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "parkingapp",
   "main": "app.js",
+  "//": "Usar require() (CommonJS). Quitar 'type: module' para evitar errores con nodemon.",
   "scripts": {
     "local": "nodemon app.js",
+    "build": "node build.js",
     "test": "jest"
   },
   "author": "Cesar Garzon",
@@ -12,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "chart.js": "^4.5.0",
+    "compression": "^1.8.1",
     "csv-writer": "^1.6.0",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.3",
@@ -27,7 +30,9 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "clean-css-cli": "^5.6.3",
     "jest": "^30.0.5",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "terser": "^5.44.0"
   }
 }

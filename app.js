@@ -4,10 +4,13 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 var session = require('express-session');
 var path = require('path');
+const compression = require('compression');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+app.use(compression());
 
 //controller
 const estados = require('./controler/Estados')
