@@ -112,7 +112,9 @@ router.post('/add',auth, async function(req, res) {
       Valor:0,
       duracion_parqueo:0
     }
-    const pago = await new Pagos(pagosobject).save();
+    await new Pagos(pagosobject).save();
+
+    
     const TiposdeVehiculos = await TipousVehiculo.findAll();
     const tiposdevehiculolist = await procesoArray(TiposdeVehiculos)
     let meesaje = {
