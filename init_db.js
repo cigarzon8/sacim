@@ -121,7 +121,7 @@ async function initializeDatabase() {
 
                 { id_tipo_vehiculo: 1, nombre_estado: 'Bicicleta'},
                 { id_tipo_vehiculo: 2, nombre_estado: 'Carro'},
-                { id_tipo_vehiculo: 3, nombre_estado: 'Motocileta'},
+                { id_tipo_vehiculo: 3, nombre_estado: 'Motocicleta'},
 
             ]);
         }
