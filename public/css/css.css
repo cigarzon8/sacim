@@ -665,12 +665,12 @@ a:focus {
   color: #171717;
 }
 
-    .contact_sectionblack{
-        background-color: var(  --color-fondo-oscuro);
-    }
-    .button{
-        border-radius: 15px;
-    }
+  .contact_sectionblack{
+      background-color: var(  --color-fondo-oscuro);
+  }
+  .button{
+      border-radius: 15px;
+  }
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
