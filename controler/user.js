@@ -4,6 +4,7 @@ var router = express.Router();
 const User = require('../model/Usuario');
 const Estado = require('../model/Estado')
 const TipoDocumentos = require('../model/Tipos_documentos')
+const Roles = require('../model/Rol')
 const auth = require('../midleware/auth')
 const procesoArray = require('../utils/procesoArray')
 const Parqueadero = require('../model/Parqueadero');
@@ -25,7 +26,7 @@ router.get('/', auth,async function(req, res) {
       return userJson;
     }
     );
-    const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Herramientas"]
+    const values = ["#","Estado","Nombres","Apellidos","Correo","Documento","Rol","Herramientas"]
 
   res.render('user/list', {datalist:usersData,headerlist:values});
 });
@@ -62,9 +63,13 @@ router.get('/logout',auth, async function(req, res) {
 });
 
 router.get('/add',auth, async function(req, res) {
+
+  const roles1 = await rolByid(req)
+
   const tiposDocumentos1 = await TipoDocumentos.findAll()
   const tiposDocumentos = await  procesoArray(tiposDocumentos1)
-  res.render('user/add',{data:{},tiposDocumentos,meesaje:{}});
+  const roles = await  procesoArray(roles1)
+  res.render('user/add',{data:{},tiposDocumentos,roles,meesaje:{}});
 });
 
 router.get('/myprofile/:id',auth, async function(req, res) {
@@ -114,9 +119,9 @@ router.post('/myprofile',auth, async function(req, res) {
 });
 
 router.post('/add',auth, async function(req, res) {
-  req.body.id_proyecto = 1 
+  req.body.id_proyecto = req?.session?.user?.id_proyecto
   req.body.estado = 1
-  req.body.id_rol = 2
+
    const tiposDocumentos1 = await TipoDocumentos.findAll()
   const tiposDocumentos = await  procesoArray(tiposDocumentos1)
   let meesaje = {
@@ -170,5 +175,15 @@ async function byid(id_usuario, fn) {
     limit:1
   });
 }
+async function rolByid(req){
+  let filtro = {id_rol:0}
 
+  const rollogin = req?.session?.user?.id_rol
+
+  if (rollogin == 3) filtro = {}
+  if (rollogin == 1) filtro = { id_rol: 2 }
+  return await Roles.findAll({
+    where: filtro,
+  })
+}
 module.exports = router;

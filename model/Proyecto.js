@@ -14,6 +14,7 @@ const Proyecto = sequelize.define(
         type: DataTypes.STRING(150),
         allowNull: false,
         required: true,
+        unique: true,
       },
     estado: {
         type: DataTypes.INTEGER,
@@ -31,7 +32,7 @@ const Proyecto = sequelize.define(
         required: true,
       },
     telefono: {
-        type: DataTypes.INTEGER(15),
+        type: DataTypes.STRING(15),
         allowNull: false,
         required: true,
       },
@@ -39,6 +40,7 @@ const Proyecto = sequelize.define(
         type: DataTypes.STRING(150),
         allowNull: false,
         required: true,
+        unique: true,
       }
     }
 );

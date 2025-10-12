@@ -32,7 +32,7 @@
                 <tbody>
                     {{#each datalist}}
                       <tr>
-                      <td>{{this.userid}}</td>
+                      <td>{{this.id_usuario}}</td>
                       <td>{{this.estado}}</td>
 
 
@@ -40,6 +40,7 @@
                       <td>{{this.apellidos}}</td>
                       <td>{{this.correo}}</td>
                       <td>{{this.documento}}</td>
+                      <td>{{this.id_rol}}</td>
                       <td>
                         <!--a href="/user/remove/{{this.userid}}">
                           <button class="btn btn-danger">Delete</button>

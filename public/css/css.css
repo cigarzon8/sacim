@@ -861,3 +861,7 @@ Responsibe
   justify-content: center;/* centra en vertical */
   text-align: center;
 }
+
+.alert{
+  text-align: center;
+}

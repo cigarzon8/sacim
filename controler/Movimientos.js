@@ -23,7 +23,8 @@ router.get('/', auth,async function(req, res) {
       as: 'IdVehiculo',
       attributes: ['placa'],
     },
-  ],limit:10
+  ],limit:10,
+  order: [['createdAt', 'DESC']],
   });
 
   const vehiculodata = moimientos.map(parq =>{
@@ -43,7 +44,6 @@ router.get('/add',auth, async function(req, res) {
 });
 
 router.post('/add',auth, async function(req, res) {
-  console.log('req.body',req.body)
    req.body.id_proyecto = 1 
    req.body.estado = 1 
   const placa = req.body.placa

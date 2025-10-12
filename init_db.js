@@ -148,6 +148,7 @@ async function initializeDatabase() {
         //preguntar por que la fecha no se guarda de hoy
         await Proyectopago.belongsTo(Estado, { foreignKey: 'estado', as: 'EstadoRelacion' });
         await Proyectopago.belongsTo(TipoPagos, { foreignKey: 'pagoestado', as: 'PagoEstado' });
+        //await Proyectopago.belongsTo(Proyecto, { foreignKey: 'id_proyecto', as: 'IdProyecto' });
         await Proyectopago.sync({ force: true });
         const  ExistProyectoPago =  await Proyectopago.findOne({limit:1});
         if (!ExistProyectoPago){

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Proyectopago = require('../model/Proyectopago');
+const Proyecto = require('../model/Proyecto')
 const Estado = require('../model/Estado')
 const TipoPagos =  require('../model/Tipos_pagos')
 const auth = require('../midleware/auth')
@@ -19,10 +20,15 @@ router.get('/', auth,async function(req, res) {
       model: TipoPagos,
       as: 'PagoEstado',
       attributes: ['nombre_estado'],
-    },
-    
+    }/*,
+    {
+      model: Proyecto,
+      as: 'IdProyecto',
+      attributes: ['nombre_proyecto'],
+    },*/    
   ]
   });
+  console.log('proyectopago',proyectopago)
 
   const values = ["#","Estado","pago","Fecha inicio licencia","Fecha fin licencia","valor","Acciones"]
   res.render('proyectopago/list', {datalist:procesarConForAsync(proyectopago),headerlist:values});
@@ -31,7 +37,9 @@ router.get('/', auth,async function(req, res) {
 
 router.get('/add',auth, async function(req, res) {
   
+  
   const pagoestadoList1 = await TipoPagos.findAll()
+  const proyecto1 = await Proyecto.findAll();
   const date = new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' });
   const colombiaDate = new Date(date);
 
@@ -45,12 +53,12 @@ router.get('/add',auth, async function(req, res) {
 
 
   const pagoestadoList = await procesoArray(pagoestadoList1)
-  res.render('proyectopago/add',{data:{},meesaje:{},pagoestadoList,hoy});
+  const proyectos = await procesoArray(proyecto1)
+  res.render('proyectopago/add',{data:{},meesaje:{},pagoestadoList,proyectos,hoy});
 });
 
 router.post('/add',auth, async function(req, res) {
   req.body.estado = 1
-  req.body.id_proyecto = 1
 
   let meesaje = {
     estado:'success',

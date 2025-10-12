@@ -41,8 +41,10 @@ app.engine('hbs', engine({
     defaultLayout: false, // Deshabilitar el uso de un layout predeterminado
     partialsDir: __dirname + '/views/partials', // Directorio de los parciales
     helpers: {
-        eq: function (a, b) {
-            return a === b;
+        eq: function (a, b) {return a === b},
+        or: function (a, ...args) {
+            const valores = args.slice(0, -1);
+            return valores.some(v => Number(a) === Number(v));
         }
     }
 }));

@@ -17,41 +17,52 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
             <ul class="navbar-nav  ">
-            <li class="nav-item active">
+             <li class="nav-item active">
                 <a class="nav-link" href="/estados">Estados </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/proyecto"> Proyectos </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/proyectopago">Pago de proyecto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/user"> Usuarios </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/vehiculo"> Vehículos </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/valores"> Valores </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/movimientos"> Movimientos </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/parqueadero"> Parqueadero </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/informes"> Informes </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/pagos"> Pagos </a>
-            </li>
+
+            {{#if (or rol 3)}}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/proyecto"> Proyectos </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/proyectopago">Pago de proyecto</a>
+                </li>
+            {{/if}}
+            {{#if (or rol 3 1)}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/user"> Usuarios </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/informes"> Informes </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pagos"> Pagos </a>
+                </li>
+            {{/if}}
+
+            {{#if (or rol 3 1 2)}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/vehiculo"> Vehículos </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/valores"> Valores </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/movimientos"> Movimientos </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/parqueadero"> Parqueadero </a>
+                </li>
+            {{/if}}
 
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Iniciar sesión</a>
-            </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Cierre cesion</a>
+                </li>
             </ul>
         </div>
         </div>

@@ -67,8 +67,8 @@ router.post('/add',auth, async function(req, res) {
     await proyecto.save();
     res.render('proyecto/add',{data:{},meesaje:meesaje});
   } catch (error) {
-    meesaje.estado = 'danger',
-    meesaje.text = 'Correo o documento duplicado'+error
+    meesaje.estado = 'danger'
+    meesaje.text = 'Correo o documento duplicado '
     res.render('proyecto/add',{data:req.body,meesaje:meesaje});
   }
 });

@@ -56,7 +56,14 @@
 
 
 
-
+                    <div>
+                        <select name="id_proyecto" id="id_proyecto">
+                        <option value="" disabled selected>Proyecto</option>
+                        {{#each proyectos}}
+                            <option value="{{this.id_proyecto}}">{{this.nombre_proyecto}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
 
                         <div class="form-group">
                             <input 

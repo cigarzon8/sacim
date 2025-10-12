@@ -5,7 +5,7 @@
 <section class="contact_section layout_padding">
     <div class="custom_heading-container">
         <h3 class=" ">
-            Pago de Proyectos {{data.nombre_proyecto}}
+            Agregar Usuarios
         </h3>
     </div>
     <br>
@@ -66,7 +66,14 @@
       </select>
   </div>
 
-
+  <div>
+      <select name="id_rol" id="id_rol">
+      <option value="" disabled selected>Tipo de Usuario</option>
+      {{#each roles}}
+          <option value="{{this.id_rol}}">{{this.nombre}}</option>
+      {{/each}}
+      </select>
+  </div>
 
   <div class="form-group">
     <input type="number" class="form-control" name="documento" id="documento" placeholder="Documento" autocomplete="off" required value="{{data.documento}}">
