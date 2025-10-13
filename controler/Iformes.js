@@ -16,7 +16,7 @@ const procesoArray = require('../utils/procesoArray')
 const auth = require('../midleware/auth')
 const TipoFacturacion = require('../model/Tipos_facturacion')
 const TipoMovimiento = require('../model/Tipos_movimiento')
-
+const formatoFecha = require('../utils/formatofecha')
 
 router.get('/', auth,async function(req, res) {
   res.render('informes/list', {});
@@ -25,6 +25,7 @@ router.get('/', auth,async function(req, res) {
 router.get('/backup', async function (req, res) {
   try {
   const parqueaderos = await Movimiento.findAll({
+    order: [['createdAt', 'DESC']],
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
@@ -55,7 +56,6 @@ router.get('/backup', async function (req, res) {
       Placa: p.IdVehiculo?.placa || '',
       hora: p.createdAt || '',
     }));
-    console.log('data',data)
     // Generar CSV con cabeceras + registros
     const csv =
       csvStringifier.getHeaderString() +
@@ -71,12 +71,12 @@ router.get('/backup', async function (req, res) {
 });
 
 router.get('/estadoplaca', auth,async function(req, res) {
-  console.log('placa',req.query.placa)
   let placa = req.query.placa
   let vehiculodata ={}
   let id_vehiculo = null
   const filstro = 
   {
+    order: [['createdAt', 'DESC']],
     include: [{
       model: Estado,
       as: 'EstadoRelacion',
@@ -97,6 +97,7 @@ router.get('/estadoplaca', auth,async function(req, res) {
       as: 'TipoUsuario',
       attributes: ['nombre_estado'],
     }
+    
   ]
   }
   if (placa){
@@ -107,6 +108,8 @@ router.get('/estadoplaca', auth,async function(req, res) {
         vehiculodata.dataValues.estado = vehiculodata.dataValues.EstadoRelacion.nombre_estado;
         vehiculodata.dataValues.tipovehiculo = vehiculodata.dataValues.TipoVehiculo.nombre_estado;
         vehiculodata.dataValues.idtipovehiculo = vehiculodata.dataValues.TipoVehiculo
+        vehiculodata.dataValues.createdAt = formatoFecha(vehiculodata.dataValues.createdAt)
+        
         vehiculodata = vehiculodata.toJSON();
       }
   }
@@ -122,11 +125,11 @@ router.get('/estadoplaca', auth,async function(req, res) {
   const Movimientodata = moimientos.map(parq =>{
     const vehiculoJson = parq.toJSON();
     vehiculoJson.estado = parq.TipoMovimiento.nombre_estado;
+    vehiculoJson.createdAt = formatoFecha(vehiculoJson.createdAt)
     return vehiculoJson
   } );
 
   var data = {placa,Movimientodata,vehiculodata}
-  console.log('data',data)
   const values = ["hora","Tipo"]
   res.render('informes/estadovehiculo', {data,headerlist:values});
 });

@@ -11,6 +11,8 @@ const TipousUsuario = require('../model/Tipos_usuario')
 const TipoFacturacion = require('../model/Tipos_facturacion')
 const TipousVehiculo = require('../model/Tipos_vehiculo')
 const TipoMovimiento = require('../model/Tipos_movimiento')
+const formatoFecha = require('../utils/formatofecha')
+
 
 router.get('/', auth,async function(req, res) {
   const moimientos = await Movimiento.findAll({
@@ -31,6 +33,7 @@ router.get('/', auth,async function(req, res) {
     const vehiculoJson = parq.toJSON();
     vehiculoJson.estado = parq.TipoMovimiento.nombre_estado;
     vehiculoJson.placa = parq.IdVehiculo.placa
+    vehiculoJson.createdAt = formatoFecha(vehiculoJson.createdAt)
     return vehiculoJson
   } );
   const values = ["#","Placa","Tipo Movimiento","Fecha Movimiento"]

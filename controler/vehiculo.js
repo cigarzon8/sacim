@@ -41,17 +41,19 @@ router.get('/', auth,async function(req, res) {
   if (placa) filstro.where = {placa}
 
   const vehiculo = await Vehiculo.findAll(filstro);
+
   const vehiculodata = vehiculo.map(vehi =>{
     const vehiculoJson = vehi.toJSON();
-
     vehiculoJson.estado = vehi.EstadoRelacion.nombre_estado;
     vehiculoJson.tipovehiculo = vehi.TipoVehiculo.nombre_estado;
     vehiculoJson.idtipovehiculo = vehi.TipoVehiculo
+    vehiculoJson.TipoUsuario = vehi.TipoUsuario.nombre_estado
+    
     return vehiculoJson
   } );
   const users = await User.findAll();
 
-  const values = ["#","Estado","Placa","Tipo Vehiculo","Usuario"]
+  const values = ["#","Estado","Placa","Tipo Vehiculo","Tipo Usuario"]
   res.render('vehiculo/list', {datalist:vehiculodata,headerlist:values,users});
 });
 
@@ -97,7 +99,7 @@ router.post('/add',auth, async function(req, res) {
     res.render('vehiculo/add',{data:{},meesaje:meesaje});
   } catch (error) {
     meesaje.estado = 'danger',
-    meesaje.text = 'Correo o documento duplicado'+error
+    meesaje.text = 'Placa ya exite '
     res.render('vehiculo/add',{data:req.body,meesaje:meesaje});
   }
 });
