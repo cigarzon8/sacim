@@ -94,7 +94,13 @@
                                 Asigne una fecha.
                             </div>
                         </div>
-                    <input id="id_pago_proyecto" name="id_pago_proyecto" type="hidden" value="{{data.id_pago_proyecto}}">
+
+                        {{#if data.id_pago_proyecto}}
+                        <input id="id_pago_proyecto" name="id_pago_proyecto" type="hidden" value="{{data.id_pago_proyecto}}">
+                        {{else}}
+                        <input id="id_pago_proyecto" name="id_pago_proyecto" type="hidden" value="0">
+                        {{/if}}
+
 
 
 
