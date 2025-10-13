@@ -58,7 +58,8 @@ router.post('/add',auth, async function(req, res) {
     }
   }
   req.body.telefono =  parseInt(req.body.telefono)
-  let proyecto = await byid(req?.body?.id_proyecto);
+  let id_proyectovalidation = req?.body?.id_proyecto || 0
+  let proyecto = await byid(id_proyectovalidation);
   if (proyecto){
     Object.assign(proyecto, req.body);
     await proyecto.save?.();
