@@ -45,14 +45,18 @@ router.post('/add',auth, async function(req, res) {
     estado:'success',
     text:'Usuario Creador correctamente'
   }
+
+
   for (let key in req.body) {
     if (req.body[key] === null) {
       meesaje.estado = 'danger',
       meesaje.text = 'Diligencie todos los campos'
       return res.render('proyecto/add',{data:req.body,meesaje:meesaje});
     }
+    if (req.body[key] === '') {
+      delete req.body[key];
+    }
   }
-  req.body.estado = 1;
   req.body.telefono =  parseInt(req.body.telefono)
   let proyecto = await byid(req?.body?.id_proyecto);
   if (proyecto){
