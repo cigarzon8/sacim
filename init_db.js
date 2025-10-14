@@ -216,15 +216,16 @@ async function initializeDatabase() {
         const  ExistValores =  await Valores.findOne({limit:1});
         if (!ExistValores){
             await Valores.bulkCreate([
-                {valor:1, estado:1 , tipovehiculo:1, tipofacturacion:2,id_proyecto:1},
-                {valor:2, estado:1 , tipovehiculo:1, tipofacturacion:3,id_proyecto:1},
-                {valor:2, estado:1 , tipovehiculo:1, tipofacturacion:5,id_proyecto:1},
-                {valor:3, estado:1 , tipovehiculo:2, tipofacturacion:2,id_proyecto:1},
-                {valor:4, estado:1 , tipovehiculo:2, tipofacturacion:3,id_proyecto:1},
-                {valor:4, estado:1 , tipovehiculo:2, tipofacturacion:5,id_proyecto:1},
-                {valor:5, estado:1 , tipovehiculo:3, tipofacturacion:2,id_proyecto:1},
-                {valor:6, estado:1 , tipovehiculo:3, tipofacturacion:3,id_proyecto:1},
-                {valor:6, estado:1 , tipovehiculo:3, tipofacturacion:5,id_proyecto:1}
+                {valor:13100, estado:1 , tipovehiculo:1, tipofacturacion:1,id_proyecto:1},
+                {valor:11, estado:1 , tipovehiculo:1, tipofacturacion:2,id_proyecto:1},
+                {valor:22, estado:1 , tipovehiculo:1, tipofacturacion:3,id_proyecto:1},
+                {valor:33, estado:1 , tipovehiculo:1, tipofacturacion:5,id_proyecto:1},
+                {valor:44, estado:1 , tipovehiculo:2, tipofacturacion:2,id_proyecto:1},
+                {valor:55, estado:1 , tipovehiculo:2, tipofacturacion:3,id_proyecto:1},
+                {valor:66, estado:1 , tipovehiculo:2, tipofacturacion:5,id_proyecto:1},
+                {valor:77, estado:1 , tipovehiculo:3, tipofacturacion:2,id_proyecto:1},
+                {valor:88, estado:1 , tipovehiculo:3, tipofacturacion:3,id_proyecto:1},
+                {valor:99, estado:1 , tipovehiculo:3, tipofacturacion:5,id_proyecto:1}
             ]);
         }
 

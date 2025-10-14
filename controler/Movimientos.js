@@ -78,6 +78,8 @@ router.post('/add',auth, async function(req, res) {
 
   let vehiculo = await Vehiculo.findOne(filstro);
 
+
+
   if(req.body.tipo_movimiento  == 'Ingresar'){
     req.body.tipo_movimiento = 1;
   }
@@ -100,22 +102,49 @@ router.post('/add',auth, async function(req, res) {
       vehiculo = await VehiculoNuevo.save();
       req.body.id_vehiculo = vehiculo.dataValues.id_vehiculo
     }
-    MovimientoNuevo = new Movimiento(req.body)
-    const movimientoNuevo2 = await MovimientoNuevo.save();
+        MovimientoNuevo = new Movimiento(req.body)
+        const movimientoNuevo2 = await MovimientoNuevo.save();
+        const movimientoNuevo2_id = movimientoNuevo2.dataValues.id_movimiento
+    if (req.body.tipo_movimiento == 1 ){
 
-    const pagosobject = {
-      id_vehiculo:req.body.id_vehiculo, 
-      estado:1,
-      id_movimiento_ngreso:movimientoNuevo2.dataValues.id_movimiento,
-      id_movimiento_salida:movimientoNuevo2.dataValues.id_movimiento,
-      estado_pago:1,
-      tiporenta: vehiculo.dataValues.tipofacturacion,
-      id_usuario:1,
-      id_proyecto:1,
-      Valor:0,
-      duracion_parqueo:0
+
+        if (vehiculo?.tipousuario == 2){
+        const pagosobject = {
+          id_vehiculo:req.body.id_vehiculo, 
+          estado:1,
+          id_movimiento_ngreso:movimientoNuevo2_id,
+          id_movimiento_salida:movimientoNuevo2_id,
+          estado_pago:1,
+          tiporenta: vehiculo.dataValues.tipofacturacion,
+          id_usuario:1,
+          id_proyecto:1,
+          Valor:0,
+          duracion_parqueo:0
+        }
+
+        await new Pagos(pagosobject).save();
+      }
+
+    }else{
+      if (vehiculo?.tipousuario == 2){
+        //fin id and id vehicule con estado 
+        //i id movimiento ovial
+        const filstro = {}
+        filstro.where = {estado_pago:1,id_vehiculo:vehiculo.id_vehiculo}
+        const Existe_Pago = await Pagos.findOne(filstro)
+
+        const filterValue = {where:{tipofacturacion:Existe_Pago.tiporenta,tipovehiculo:vehiculo.tipovehiculo}}
+        const ValorRenta = await Valores.findOne(filterValue) 
+        let Valor = ValorRenta.valor*diferenciaEnMinutos(Existe_Pago.createdAt)
+        Existe_Pago.set({
+          Valor,
+          estado:3,
+          estado_pago:3.
+        });
+        Existe_Pago.save();
+      }
     }
-    await new Pagos(pagosobject).save();
+
 
     
     const TiposdeVehiculos = await TipousVehiculo.findAll();
@@ -127,33 +156,13 @@ router.post('/add',auth, async function(req, res) {
     return res.render('movimiento/add',{data:{tiposdevehiculolist},meesaje});
 
 });
-async function savepago(idingreso,idsalida=0) {
-  const pagonuevo ={
-    placa:idingreso.placa,
-    tiporenta:1,
-    estado:1,
-    idIngreso:idingreso.id,
-    idSalida:idingreso.id,
-    pagoEstado:7,
-    usuario:1,
-    proyecto:1,
-    Valor:0,
-    facturaElectronica:false
-
-  }
-  const pago = new Pagos(pagonuevo).save();
-}
-
-async function exitSavePago(idingreso) {
-  const pagos = await find(idingreso.placa);
-  if (pagos){
-  const createdAt = new Date(pagos.dataValues.createdAt);
-  const ahora = new Date();
-  const minutosPasados = Math.floor((ahora - createdAt) / 1000 / 60)*pagos?.EstadoValor?.valor;
-  pagos.Valor = minutosPasados;
-  await pagos.save();
-  }
-
+function diferenciaEnMinutos(fechaCreacion) {
+  const fecha1 = new Date(fechaCreacion);
+  const fecha2 = new Date(); // hora actual
+  const diffMs = fecha2 - fecha1;
+  let diffMin = Math.floor(diffMs / (1000 * 60));
+  if (!diffMin) diffMin = 1 
+  return diffMin;
 }
 
 
