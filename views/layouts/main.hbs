@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="SACIM es una plataforma inteligente para administrar parqueaderos de forma fácil, económica y segura. Controla ingresos, salidas, vehículos y reportes desde cualquier lugar. Ideal para negocios grandes o pequeños en Bogotá y toda Colombia.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="/static/css/css.min.css?11octubre2025">
+
+    <link rel="preload" href="/static/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    </noscript>
+
+    <script src="/static/js/bootstrap.bundle.min.js" async></script>
+    <script src="/static/js/fontawesome.js" async></script>
+    <script src="/static/js/js.min.js" async></script>
+
+
+    <title>SACIM | Plataforma inteligente para administrar parqueaderos en Bogotá y toda Colombia</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+</head>
+
+  <body>
+    {{#if isHome}}
+      {{> navlanding}}
+    {{else}}
+      {{> nav}}
+    {{/if}}
+
+    {{{body}}}
+    {{> footer}}
+  </body>
+
+</html>

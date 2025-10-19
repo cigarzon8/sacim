@@ -823,16 +823,15 @@ Responsibe
   max-width: 100%;
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 70px;
+  font-size:clamp(3rem, 9vw, 6rem);
   font-weight: 700;
-  text-align: center;
+  color:white;
 }
 
 .landing-description{
   max-width: 100%;
   margin-top: 0;
-  text-align: center;
-  font-size: 28px;
+  color:white;
 }
 
 .vehiculo-card {

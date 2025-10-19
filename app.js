@@ -38,7 +38,7 @@ const init = require('./init_db');
 // Configurar expresss
 app.engine('hbs', engine({
     extname: 'hbs',
-    defaultLayout: false, // Deshabilitar el uso de un layout predeterminado
+    defaultLayout: 'main', // Deshabilitar el uso de un layout predeterminado
     partialsDir: __dirname + '/views/partials', // Directorio de los parciales
     helpers: {
         eq: function (a, b) {return a === b},
