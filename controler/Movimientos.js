@@ -12,7 +12,7 @@ const TipoFacturacion = require('../model/Tipos_facturacion')
 const TipousVehiculo = require('../model/Tipos_vehiculo')
 const TipoMovimiento = require('../model/Tipos_movimiento')
 const formatoFecha = require('../utils/formatofecha')
-
+const Parqueadero = require('../model/Parqueadero')
 
 router.get('/', auth,async function(req, res) {
   const moimientos = await Movimiento.findAll({
@@ -87,6 +87,8 @@ router.post('/add',auth, async function(req, res) {
     req.body.tipo_movimiento = 2;
   }
 
+
+
   if (vehiculo){
     req.body.id_vehiculo = vehiculo.dataValues.id_vehiculo
   }else{
@@ -102,12 +104,10 @@ router.post('/add',auth, async function(req, res) {
       vehiculo = await VehiculoNuevo.save();
       req.body.id_vehiculo = vehiculo.dataValues.id_vehiculo
     }
-        MovimientoNuevo = new Movimiento(req.body)
-        const movimientoNuevo2 = await MovimientoNuevo.save();
-        const movimientoNuevo2_id = movimientoNuevo2.dataValues.id_movimiento
+    MovimientoNuevo = new Movimiento(req.body)
+    const movimientoNuevo2 = await MovimientoNuevo.save();
+    const movimientoNuevo2_id = movimientoNuevo2.dataValues.id_movimiento
     if (req.body.tipo_movimiento == 1 ){
-
-
         if (vehiculo?.tipousuario == 2){
         const pagosobject = {
           id_vehiculo:req.body.id_vehiculo, 
@@ -135,23 +135,50 @@ router.post('/add',auth, async function(req, res) {
 
         const filterValue = {where:{tipofacturacion:Existe_Pago.tiporenta,tipovehiculo:vehiculo.tipovehiculo}}
         const ValorRenta = await Valores.findOne(filterValue) 
-        let Valor = ValorRenta.valor*diferenciaEnMinutos(Existe_Pago.createdAt)
+        let Valor = ValorRenta?.valor*diferenciaEnMinutos(Existe_Pago.createdAt)
         Existe_Pago.set({
           Valor,
           estado:3,
-          estado_pago:3.
+          estado_pago:3,
+          id_movimiento_salida:movimientoNuevo2_id,
         });
         Existe_Pago.save();
       }
     }
 
+  let parqueaderofiltro = 
+  {
+    estado:1,
+    tipovehiculo:req.body.tipovehiculo,
+    tipousuario: vehiculo.tipousuario,
+    id_proyecto:1}
+  let ParqueaderoMatch = await Parqueadero.findOne(parqueaderofiltro);
 
-    
+
     const TiposdeVehiculos = await TipousVehiculo.findAll();
     const tiposdevehiculolist = await procesoArray(TiposdeVehiculos)
     let meesaje = {
      estado:'success',
      text:'Movimiento registrados correctaente'
+    }
+
+    if(ParqueaderoMatch.capacidad <= 0){
+      meesaje = {
+        estado:'danger',
+        text:'No hay Capacidad en el parqueadero'
+      } 
+    }else{
+      if(req.body.tipo_movimiento == 1){
+          ParqueaderoMatch.set({
+            ocupacion:ParqueaderoMatch.ocupacion+1
+          });
+      }
+      if(req.body.tipo_movimiento == 2){
+            ParqueaderoMatch.set({
+            ocupacion:ParqueaderoMatch.ocupacion-1
+          });
+      }
+      ParqueaderoMatch.save();
     }
     return res.render('movimiento/add',{data:{tiposdevehiculolist},meesaje});
 

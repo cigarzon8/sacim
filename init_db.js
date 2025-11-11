@@ -29,8 +29,8 @@ async function initializeDatabase() {
 
 
         //await Estado.sync({ force: true });
-        const ExistEstado =  await Estado.findOne({limit:1});
-        if (!ExistEstado){
+        //const ExistEstado =  await Estado.findOne({limit:1});
+        //if (!ExistEstado){
 
             await Estado.bulkCreate([
 
@@ -41,7 +41,7 @@ async function initializeDatabase() {
 
             ]);
 
-        }
+        //}
 
         
         //await TipoPagos.sync({ force: true });
@@ -267,6 +267,19 @@ async function initializeDatabase() {
         if (!ExistParqueadero){
             await Parqueadero.bulkCreate([
                 { estado:1, tipovehiculo:1 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+                { estado:1, tipovehiculo:1 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+                { estado:1, tipovehiculo:2 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+                { estado:1, tipovehiculo:2 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+                { estado:1, tipovehiculo:3 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+                { estado:1, tipovehiculo:3 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:1},
+
+
+                { estado:1, tipovehiculo:1 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
+                { estado:1, tipovehiculo:1 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
+                { estado:1, tipovehiculo:2 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
+                { estado:1, tipovehiculo:2 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
+                { estado:1, tipovehiculo:3 , tipoveparqueadero:1, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
+                { estado:1, tipovehiculo:3 , tipoveparqueadero:2, id_proyecto:1,capacidad:10,ocupacion:0,tipousuario:2},
             ]);
         }
 
