@@ -29,7 +29,7 @@ async function initializeDatabase() {
 
 
         await Estado.sync({ force: true });
-        const ExistEstado =  await Estado.findOne({limit:1});
+        /*const ExistEstado =  await Estado.findOne({limit:1});
         if (!ExistEstado){
 
             await Estado.bulkCreate([
@@ -41,7 +41,7 @@ async function initializeDatabase() {
 
             ]);
 
-        }
+        }*/
 
         
         await TipoPagos.sync({ force: true });
